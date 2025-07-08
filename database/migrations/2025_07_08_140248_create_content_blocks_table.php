@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('content_blocks', function (Blueprint $table) {
             $table->id();
+            $table->morphs('parent');
+            $table->string('image');
+            $table->text('content');
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }
