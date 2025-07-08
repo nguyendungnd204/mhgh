@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('thumbnail')->nullable();
-            $table->timestamp('published_at')->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
