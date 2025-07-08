@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('topup_transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('transaction_code')->unique();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('server_name');
+            $table->string('character_name');
+            $table->string('card_type');
+            $table->integer('amount');
+            $table->string('serial');
+            $table->string('card_code');
+            $table->enum('status', ['pending', 'success', 'failed'])->default('pending');
+            $table->text('response_content')->nullable();
+            $table->timestamp('submitted_at');
+            $table->timestamp('verified_at')->nullable();
+            $table->boolean('is_manual')->default(false);
             $table->timestamps();
         });
     }
