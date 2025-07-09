@@ -125,17 +125,6 @@
             @yield('content')
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-100 py-4 mt-5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between">
-                <p class="mb-0">© {{ date('Y') }} Laravel App. All rights reserved.</p>
-                <p class="mb-0">Built with Laravel & Tailwind CSS</p>
-            </div>
-        </div>
-    </footer>
-
     @stack('scripts')
 </body>
 </html>
