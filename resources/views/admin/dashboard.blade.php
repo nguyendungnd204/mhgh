@@ -1,4 +1,4 @@
-@extends('layouts.authentication')
+@extends('layouts.admin')
 
 @section('title', 'dashboard')
 

@@ -1,4 +1,4 @@
-@extends('layouts.authentication')
+@extends('layouts.user')
 
 @section('title', 'dashboard')
 
