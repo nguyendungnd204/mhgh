@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,11 +22,14 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(function() {
-    Route::get('/dashboard', function () {
+    Route::get('dashboard', function () {
         return view('admin.dashboard');})->name('dashboard');
+    Route::get('events', [EventController::class, 'index' ])->name('events.index');
+    Route::post('events/store', [EventController::class, 'store' ])->name('events.store');
+    Route::get('events/create', [EventController::class, 'create' ])->name('events.create');
 });
 
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
-     Route::get('/dashboard', function () {
+     Route::get('dashboard', function () {
         return view('user.dashboard');})->name('dashboard');
 });
