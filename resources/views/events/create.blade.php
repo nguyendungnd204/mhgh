@@ -15,10 +15,10 @@
 
                     <div class="flex items-center space-x-4">
                         <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
-                            Save
+                            Tạo
                         </button>
                         <a href="{{ route('admin.events.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded">
-                            Cancel
+                            Trở về
                         </a>
                     </div>
                 </form>

@@ -10,14 +10,20 @@ class EventController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Event::query();
-        if (request()->has('search') && $request->search) {
-            $query = $query->where('title', 'like', "%" . $request->search . "%")->orWhere('description', 'like', "%" . $request->search . "%");
+        $query = Event::with(['user', 'contentBlocks']);
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%');
+            });
         }
 
-        $events = $query->latest()->paginate(10);
+        $events = $query->latest()->paginate(3);
+        //dd($events->items());
         return view('events.index', compact('events'));
     }
+
 
     public function store(Request $request)
     {
@@ -60,7 +66,8 @@ class EventController extends Controller
         return redirect()->route('admin.events.index')->with('success', 'Event created successfully');
     }
 
-    public function create(){
+    public function create()
+    {
         return view('events.create');
     }
 }

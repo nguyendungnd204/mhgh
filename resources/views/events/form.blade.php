@@ -34,7 +34,7 @@
 
 <hr class="my-6">
 
-<h3 class="text-lg font-semibold mb-4">Danh sách nội dung (Content Blocks)</h3>
+<h3 class="text-lg font-semibold mb-4">Danh sách nội dung </h3>
 
 <div id="content-blocks-wrapper">
 
