@@ -70,4 +70,19 @@ class EventController extends Controller
     {
         return view('events.create');
     }
+
+    public function show($id) {
+        $event = Event::with(['contentBlocks' => function($query) {
+            $query->orderBy('order', 'asc');
+        }, 'user'])->findOrFail($id);
+
+        //dd($event);
+        return view('events.show', compact('event'));
+    }
+
+    // public function update(Request $request, $id) {
+    //     $data = $request->validate([
+            
+    //     ])
+    // }
 }

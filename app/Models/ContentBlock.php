@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContentBlock extends Model
 {
-    protected $fillable = ['image', 'content', 'order'];
+    protected $fillable = [
+        'parent_type',
+        'parent_id', 
+        'image', 
+        'content', 
+        'order'
+    ];
 
     public function parent()
     {

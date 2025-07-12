@@ -20,7 +20,8 @@ class Event extends Model
         'end_date',
         'created_by',
         'created_at',
-        'update_at'
+        'update_at',
+        'is_active'
     ];
 
     public function user()
@@ -30,6 +31,7 @@ class Event extends Model
 
     public function contentBlocks()
     {
-        return $this->morphMany(ContentBlock::class, 'parent');
+        return $this->morphMany(ContentBlock::class, 'parent')
+                    ->orderBy('order', 'asc');
     }
 }

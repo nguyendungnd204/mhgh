@@ -40,7 +40,7 @@
                                 <th class="px-4 py-3 text-gray-700 font-semibold">Tiêu đề</th>
                                 <th class="px-4 py-3 text-gray-700 font-semibold">Mô tả</th>
                                 <th class="px-4 py-3 text-gray-700 font-semibold">Ngày bắt đầu</th>
-                                <th class="px-4 py-3 text-gray-700 font-semibold">ngày kết thúc</th>
+                                <th class="px-4 py-3 text-gray-700 font-semibold">Ngày kết thúc</th>
                                 <th class="px-4 py-3 text-gray-700 font-semibold">Trạng thái</th>
                                 <th class="px-4 py-3 text-gray-700 font-semibold">Thời gian tạo</th>
                                 <th class="px-4 py-3 text-gray-700 font-semibold">Người chỉnh sửa cuối</th>
@@ -50,13 +50,13 @@
                         <tbody>
                             @if (count($events) > 0)
                                 @foreach ($events as $event)
-                                    <tr class="border-t border-gray-200 hover:bg-gray-50">
+                                    <tr class="border-t border-gray-200 hover:bg-gray-50 cursor-pointer" onclick="window.location='{{ route('admin.events.show', $event->id) }}'">
                                         <th class="px-4 py-3 text-gray-800">{{ $event->id }}</th>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->title ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->description ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->start_date ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->end_date ?? '' }}</td>
-                                        <td class="px-4 py-3 text-gray-600">{{ $event->status ?? '' }}</td>
+                                        <td class="px-4 py-3 text-gray-600">{{ $event->is_active ? 'Hoạt động' : 'Không hoạt động' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->created_at ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->user->name ?? '' }}</td>
                                         <td class="px-4 py-3">
