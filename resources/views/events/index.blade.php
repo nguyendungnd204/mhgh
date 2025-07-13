@@ -50,7 +50,7 @@
                         <tbody>
                             @if (count($events) > 0)
                                 @foreach ($events as $event)
-                                    <tr class="border-t border-gray-200 hover:bg-gray-50 cursor-pointer" onclick="window.location='{{ route('admin.events.show', $event->id) }}'">
+                                    <tr class="border-t border-gray-200 hover:bg-gray-200 cursor-pointer" onclick="window.location='{{ route('admin.events.show', $event->id) }}'">
                                         <th class="px-4 py-3 text-gray-800">{{ $event->id }}</th>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->title ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->description ?? '' }}</td>
@@ -60,10 +60,7 @@
                                         <td class="px-4 py-3 text-gray-600">{{ $event->created_at ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->user->name ?? '' }}</td>
                                         <td class="px-4 py-3">
-                                            {{-- <a href="{{ route('product.show', $event->id) }}" class="px-3 py-1 bg-green-500 text-white rounded-md text-sm hover:bg-green-600 transition-colors">Show</a> --}}
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            {{-- <a href="{{ route('product.edit', $event->id) }}" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 transition-colors">Edit</a> --}}
+                                             <a href="{{ route('admin.events.edit', $event->id) }}" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 transition-colors text-nowrap">Chỉnh sửa</a>
                                         </td>
                                         <td class="px-4 py-3">
                                             {{-- <form action="{{route('product.destroy', $product->id)}}" method="post" class="inline-block">

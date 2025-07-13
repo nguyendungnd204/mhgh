@@ -27,7 +27,7 @@
         <!-- Content Blocks Section -->
         <div class="border-t border-gray-200">
             <div class="p-6">
-                <h3 class="text-xl font-bold mb-4">Nội dung thêm:</h3>
+                <h3 class="text-xl font-bold mb-4">Nội dung phụ:</h3>
                 
                 @if(isset($event->contentBlocks) && $event->contentBlocks->count() > 0)
                     @foreach($event->contentBlocks as $block)
