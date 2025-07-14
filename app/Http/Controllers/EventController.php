@@ -37,11 +37,11 @@ class EventController extends Controller
             $this->eventService->createEvent($request->validated(), $request);
             
             return redirect()->route('admin.events.index')
-                           ->with('success', 'Event created successfully');
+                           ->with('success', 'Tạo sự kiện thành công');
         } catch (\Exception $e) {
             return redirect()->back()
                            ->withInput()
-                           ->with('error', 'Failed to create event: ' . $e->getMessage());
+                           ->with('error', 'Có lỗi khi tạo: ' . $e->getMessage());
         }
     }
 

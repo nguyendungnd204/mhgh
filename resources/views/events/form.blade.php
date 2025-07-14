@@ -1,5 +1,5 @@
 <div class="mb-4">
-    <label for="title" class="block text-sm font-medium text-gray-700">Tiêu đề sự kiện</label>
+    <label for="title" class="block text-sm font-medium text-gray-700">Tiêu đề chính</label>
     <input type="text" name="title" id="title"
         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         value="{{ old('title') }}" required>

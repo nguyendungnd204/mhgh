@@ -33,4 +33,60 @@ class NewsRepository
     {
         return $query->latest()->paginate($perPage);
     }
+
+    public function create(array $data): News
+    {
+        return $this->model->create($data);
+    }
+
+    public function update(News $event, array $data): News
+    {
+        $event->update($data);
+        return $event->refresh();
+    }
+
+    public function delete(News $event): bool
+    {
+        return $event->delete();
+    }
+
+    public function findById(int $id): ?News
+    {
+        return $this->model->find($id);
+    }
+
+    public function findOrFail(int $id): News
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    public function findWithRelations(int $id, array $relations = []): News
+    {
+        return $this->model->with($relations)->findOrFail($id);
+    }
+
+    public function getAll(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->model->all();
+    }
+
+    public function getAllWithRelations(array $relations = []): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->model->with($relations)->get();
+    }
+
+    public function getActive(): Builder
+    {
+        return $this->model->where('is_active', true);
+    }
+
+    public function getByDateRange(string $startDate, string $endDate): Builder
+    {
+        return $this->model->whereBetween('start_date', [$startDate, $endDate]);
+    }
+
+    public function getByUser(int $userId): Builder
+    {
+        return $this->model->where('created_by', $userId);
+    }
 }

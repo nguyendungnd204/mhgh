@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 ">
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="bg-gray-100 px-6 py-4 border-b border-gray-200">
                 <div class="flex flex-wrap items-center justify-between">
@@ -17,7 +17,7 @@
                                 </form>
                             </div>
                             <div class="flex ">
-                                <a href="{{route('admin.events.create')}}" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-nowrap">Thêm sự kiện</a>
+                                <a href="{{route('admin.news.create')}}" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-nowrap">Thêm tin tức</a>
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-gray-50">
+                            <tr class="bg-gray-100">
                                 <th class="px-4 py-3 text-gray-700 font-semibold">ID</th>
                                 <th class="px-4 py-3 text-gray-700 font-semibold">Tiêu đề</th>
                                 <th class="px-4 py-3 text-gray-700 font-semibold">Mô tả</th>
@@ -50,24 +50,17 @@
                         <tbody>
                             @if (count($news) > 0)
                                 @foreach ($news as $item)
-                                    <tr class="border-t border-gray-200 hover:bg-gray-200 cursor-pointer" onclick="window.location='{{ route('admin.news.show', $new->id) }}'">
+                                    <tr class="border-t border-gray-200 hover:bg-gray-200 cursor-pointer" onclick="window.location='{{ route('admin.news.show', $item->id) }}'">
                                         <th class="px-4 py-3 text-gray-800">{{ $item->id }}</th>
                                         <td class="px-4 py-3 text-gray-600">{{ $item->title ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $item->description ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $item->start_date ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $item->end_date ?? '' }}</td>
-                                        <td class="px-4 py-3 text-gray-600 {{ $new->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">{{ $new->is_active ? 'Hoạt động' : 'Ngừng hoạt động' }}</td>
+                                        <td class="px-4 py-3 text-gray-600 {{ $item->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">{{ $item->is_active ? 'Hoạt động' : 'Ngừng hoạt động' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $item->created_at ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $item->user->name ?? '' }}</td>
                                         <td class="px-4 py-3">
-                                             <!-- <a href="{{ route('admin.news.edit', $item->id) }}" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 transition-colors text-nowrap">Chỉnh sửa</a> -->
-                                        </td>
-                                        <td class="px-4 py-3">
-                                            {{-- <form action="{{route('product.destroy', $product->id)}}" method="post" class="inline-block">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-600 transition-colors" onclick="return confirm('Are you sure')">Delete</button>
-                                            </form> --}}
+                                             <a href="{{ route('admin.news.edit', $item->id) }}" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 transition-colors text-nowrap">Chỉnh sửa</a>
                                         </td>
                                     </tr>
                                 @endforeach
