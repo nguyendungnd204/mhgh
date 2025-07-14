@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(function() {
     Route::get('dashboard', function () {
         return view('admin.dashboard');})->name('dashboard');
+
+        
     Route::get('events', [EventController::class, 'index' ])->name('events.index');
     Route::post('events/store', [EventController::class, 'store' ])->name('events.store');
     Route::get('events/create', [EventController::class, 'create' ])->name('events.create');
@@ -31,6 +34,9 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
     Route::get('events/edit/{id}', [EventController::class, 'edit'])->name('events.edit');
     Route::patch('events/update/{id}', [EventController::class, 'update'])->name('events.update');
     Route::delete('events/delete/{id}', [EventController::class, 'destroy'])->name('events.destroy');
+
+
+    Route::get('news', [NewsController::class, 'index'])->name('news.index');
 });
 
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
