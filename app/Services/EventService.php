@@ -25,7 +25,7 @@ class EventService
             $query = $this->eventRepository->search($query, $request->search);
         }
 
-        return $this->eventRepository->paginate($query, 3);
+        return $this->eventRepository->paginate($query, 10);
     }
 
     public function createEvent(array $data, Request $request): Event
