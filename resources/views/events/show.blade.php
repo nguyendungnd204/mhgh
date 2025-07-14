@@ -41,7 +41,7 @@
                         </div>
                     @endforeach
                 @else
-                    <p class="text-gray-600">Không có nội dung thêm.</p>
+                    <p class="text-gray-600">Không có nội dung phụ.</p>
                 @endif
 
                 <div class="mt-6 pt-4 border-t border-gray-200">
