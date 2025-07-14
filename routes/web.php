@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,16 +10,16 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware('guest')->group(function() {
-    Route::get('register', [UserController::class, 'showRegisterForm'])->name('register');
-    Route::post('register', [UserController::class, 'register'])->name('register');
-    Route::post('login', [UserController::class, 'login']);
-    Route::get('login', [UserController::class, 'showLoginForm'])->name('login');
+    Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('register', [AuthController::class, 'register'])->name('register');
+    Route::post('login', [AuthController::class, 'login']);
+    Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 });
 
 
 Route::middleware('auth')->group(function () {
-    Route::post('logout', [UserController::class, 'logout'])->name('logout');
-    Route::get('dashboard', [UserController::class, 'dashboard' ])->name('dashboard');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('dashboard', [AuthController::class, 'dashboard' ])->name('dashboard');
 });
 
 Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(function() {

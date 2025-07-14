@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\EventRepository;
 use App\Repositories\NewsRepository;
+use App\Repositories\UserRepository;
+use App\Services\AuthService;
 use App\Services\EventService;
 use App\Services\NewsService;
 use Illuminate\Support\ServiceProvider;
@@ -14,6 +16,9 @@ class AppServiceProvider extends ServiceProvider
 
     public function register(): void
     {
+        $this->app->bind(UserRepository::class, UserRepository::class);
+        $this->app->bind(AuthService::class, AuthService::class);
+
         $this->app->bind(EventRepository::class, EventRepository::class);
         $this->app->bind(EventService::class, EventService::class);
 
