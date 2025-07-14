@@ -19,7 +19,7 @@
             <p class="mb-2"><strong class="font-semibold">Người tạo: </strong>{{ optional($event->user)->name ?? '-' }}</p>
             <p class="mb-4"><strong class="font-semibold">Trạng thái: </strong>
                 <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full {{ $event->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
-                    {{ $event->is_active ? 'Hoạt động' : 'Không hoạt động' }}
+                    {{ $event->is_active ? 'Hoạt động' : 'Ngừng hoạt động' }}
                 </span>
             </p>
         </div>

@@ -59,8 +59,10 @@ class EventController extends Controller
         return view('events.edit', compact('event'));
     }
 
-    public function update(UpdateEventRequest $request, Event $event): RedirectResponse
+    public function update(UpdateEventRequest $request, int $id): RedirectResponse
     {
+        $event = $this->eventService->getEventById($id);
+
         try {
             $this->eventService->updateEvent($event, $request->validated(), $request);
             

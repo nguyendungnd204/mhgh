@@ -46,7 +46,7 @@
                     <label for="start_date" class="block text-sm font-medium text-gray-700">Ngày bắt đầu</label>
                     <input type="date" name="start_date" id="start_date"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ old('start_date', $event->start_date ?? '') }}" required>
+                        value="{{ old('start_date', optional($event->start_date)->format('Y-m-d')) }}" required>
                     @error('start_date')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -56,7 +56,7 @@
                     <label for="end_date" class="block text-sm font-medium text-gray-700">Ngày kết thúc</label>
                     <input type="date" name="end_date" id="end_date"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ old('end_date', $event->end_date ?? '') }}" required>
+                        value="{{ old('end_date', optional($event->end_date)->format('Y-m-d')) }}" required>
                     @error('end_date')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -67,7 +67,7 @@
                     <select name="is_active" id="is_active"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                         <option value="1" {{ old('is_active', $event->is_active) ? 'selected' : '' }}>Hoạt động</option>
-                        <option value="0" {{ old('is_active', $event->is_active) == 0 ? 'selected' : '' }}>Không hoạt động</option>
+                        <option value="0" {{ old('is_active', $event->is_active) == 0 ? 'selected' : '' }}>Ngừng hoạt động</option>
                     </select>
                     @error('is_active')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>

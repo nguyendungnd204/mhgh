@@ -56,7 +56,7 @@
                                         <td class="px-4 py-3 text-gray-600">{{ $event->description ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->start_date ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->end_date ?? '' }}</td>
-                                        <td class="px-4 py-3 text-gray-600">{{ $event->is_active ? 'Hoạt động' : 'Không hoạt động' }}</td>
+                                        <td class="px-4 py-3 text-gray-600 {{ $event->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">{{ $event->is_active ? 'Hoạt động' : 'Ngừng hoạt động' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->created_at ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $event->user->name ?? '' }}</td>
                                         <td class="px-4 py-3">

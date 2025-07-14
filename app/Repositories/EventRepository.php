@@ -42,7 +42,7 @@ class EventRepository
     public function update(Event $event, array $data): Event
     {
         $event->update($data);
-        return $event;
+        return $event->refresh();
     }
 
     public function delete(Event $event): bool
