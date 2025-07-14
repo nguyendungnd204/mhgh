@@ -18,12 +18,12 @@ class NewsController extends Controller
     {
         $news = $this->newsService->getAllNews($request);
 
-        return view('news.index', compact('news'));
+        return view('admin.news.index', compact('news'));
     }
 
     public function create(): View
     {
-        return view('news.create');
+        return view('admin.news.create');
     }
 
     public function store(StoreEventRequest $request): RedirectResponse
@@ -47,14 +47,14 @@ class NewsController extends Controller
     {
         $news = $this->newsService->getNewsById($id);
 
-        return view('news.show', compact('news'));
+        return view('admin.news.show', compact('news'));
     }
 
     public function edit(int $id): View 
     {
         $news = $this->newsService->getNewsById($id);
 
-        return view('news.edit', compact('news'));
+        return view('admin.news.edit', compact('news'));
     }
 
     public function update(UpdateEventRequest $request, int $id): RedirectResponse

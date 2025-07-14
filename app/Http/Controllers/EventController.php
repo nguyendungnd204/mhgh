@@ -19,12 +19,12 @@ class EventController extends Controller
     {
         $events = $this->eventService->getAllEvents($request);
         
-        return view('events.index', compact('events'));
+        return view('admin.events.index', compact('events'));
     }
 
     public function create(): View
     {
-        return view('events.create');
+        return view('admin.events.create');
     }
 
     public function store(StoreEventRequest $request): RedirectResponse
@@ -45,14 +45,14 @@ class EventController extends Controller
     {
         $event = $this->eventService->getEventById($id);
         
-        return view('events.show', compact('event'));
+        return view('admin.events.show', compact('event'));
     }
 
     public function edit(int $id): View
     {
         $event = $this->eventService->getEventById($id);
         
-        return view('events.edit', compact('event'));
+        return view('admin.events.edit', compact('event'));
     }
 
     public function update(UpdateEventRequest $request, int $id): RedirectResponse
