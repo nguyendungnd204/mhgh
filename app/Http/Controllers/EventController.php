@@ -12,12 +12,8 @@ use Illuminate\View\View;
 
 class EventController extends Controller
 {
-    protected $eventService;
 
-    public function __construct(EventService $eventService)
-    {
-        $this->eventService = $eventService;
-    }
+    public function __construct(private EventService $eventService){}
 
     public function index(Request $request): View
     {

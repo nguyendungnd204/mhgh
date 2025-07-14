@@ -11,12 +11,8 @@ use Illuminate\View\View;
 
 class NewsController extends Controller
 {
-    protected $newsService;
 
-    public function __construct(NewsService $newsService)
-    {
-        $this->newsService = $newsService;
-    }
+    public function __construct(private NewsService $newsService){}
 
     public function index(Request $request): View
     {
