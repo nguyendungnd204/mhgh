@@ -2,19 +2,19 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-    <h2 class="text-2xl font-bold mb-6">Chỉnh sửa sự kiện</h2>
+    <h2 class="text-2xl font-bold mb-6">Chỉnh sửa tin tức</h2>
 
     <div class="bg-white shadow-md rounded-lg">
         <div class="p-6">
-            <form action="{{ route('admin.events.update', $event->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.news.update', $news->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
 
                 <div class="mb-4">
-                    <label for="title" class="block text-sm font-medium text-gray-700">Tiêu đề sự kiện</label>
+                    <label for="title" class="block text-sm font-medium text-gray-700">Tiêu đề tin tức</label>
                     <input type="text" name="title" id="title"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ old('title', $event->title ?? '') }}" required>
+                        value="{{ old('title', $news->title ?? '') }}" required>
                     @error('title')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -24,7 +24,7 @@
                     <label for="description" class="block text-sm font-medium text-gray-700">Mô tả</label>
                     <textarea name="description" id="description"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        rows="4" required>{{ old('description', $event->description ?? '') }}</textarea>
+                        rows="4" required>{{ old('description', $news->description ?? '') }}</textarea>
                     @error('description')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -32,8 +32,8 @@
 
                 <div class="mb-4">
                     <label for="thumbnail" class="block text-sm font-medium text-gray-700">Ảnh đại diện</label>
-                    @if ($event->thumbnail)
-                        <img src="{{ asset('storage/' . $event->thumbnail) }}" alt="{{ $event->title ?? 'Thumbnail' }}" class="w-32 h-auto mb-2 rounded">
+                    @if ($news->thumbnail)
+                        <img src="{{ asset('storage/' . $news->thumbnail) }}" alt="{{ $news->title ?? 'Thumbnail' }}" class="w-32 h-auto mb-2 rounded">
                     @endif
                     <input type="file" name="thumbnail" id="thumbnail"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -46,7 +46,7 @@
                     <label for="start_date" class="block text-sm font-medium text-gray-700">Ngày bắt đầu</label>
                     <input type="date" name="start_date" id="start_date"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ old('start_date', optional($event->start_date)->format('Y-m-d')) }}" required>
+                        value="{{ old('start_date', optional($news->start_date)->format('Y-m-d')) }}" required>
                     @error('start_date')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -56,7 +56,7 @@
                     <label for="end_date" class="block text-sm font-medium text-gray-700">Ngày kết thúc</label>
                     <input type="date" name="end_date" id="end_date"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ old('end_date', optional($event->end_date)->format('Y-m-d')) }}" required>
+                        value="{{ old('end_date', optional($news->end_date)->format('Y-m-d')) }}" required>
                     @error('end_date')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -66,8 +66,8 @@
                     <label for="is_active" class="block text-sm font-medium text-gray-700">Trạng thái</label>
                     <select name="is_active" id="is_active"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                        <option value="1" {{ old('is_active', $event->is_active) ? 'selected' : '' }}>Hoạt động</option>
-                        <option value="0" {{ old('is_active', $event->is_active) == 0 ? 'selected' : '' }}>Ngừng hoạt động</option>
+                        <option value="1" {{ old('is_active', $news->is_active) ? 'selected' : '' }}>Hoạt động</option>
+                        <option value="0" {{ old('is_active', $news->is_active) == 0 ? 'selected' : '' }}>Ngừng hoạt động</option>
                     </select>
                     @error('is_active')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -79,8 +79,8 @@
                 <h3 class="text-lg font-semibold mb-4">Danh sách nội dung</h3>
 
                 <div id="content-blocks-wrapper">
-                    @if(isset($event->contentBlocks) && $event->contentBlocks->count() > 0)
-                        @foreach($event->contentBlocks as $index => $block)
+                    @if(isset($news->contentBlocks) && $news->contentBlocks->count() > 0)
+                        @foreach($news->contentBlocks as $index => $block)
                             <div class="content-block mb-6 border border-gray-300 rounded-lg p-4 bg-gray-50">
                                 <div class="flex justify-between items-center mb-3">
                                     <h4 class="text-md font-medium text-gray-800">Nội dung #{{ $index + 1 }}</h4>
@@ -169,7 +169,7 @@
                 </button>
 
                 <div class="flex justify-end gap-4">
-                    <a href="{{ route('admin.events.index') }}" class="inline-block px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors">Quay lại</a>
+                    <a href="{{ route('admin.news.index') }}" class="inline-block px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors">Quay lại</a>
                     <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">Cập nhật</button>
                 </div>
             </form>
@@ -178,7 +178,7 @@
 </div>
 
 <script>
-    let blockIndex = parseInt("{{ isset($event->contentBlocks) && $event->contentBlocks->count() > 0 ? $event->contentBlocks->count() : 1 }}");
+    let blockIndex = parseInt("{{ isset($news->contentBlocks) && $news->contentBlocks->count() > 0 ? $news->contentBlocks->count() : 1 }}");
 
     function addContentBlock() {
         const wrapper = document.getElementById('content-blocks-wrapper');
@@ -209,13 +209,13 @@
                 } else if (el.type === 'number') {
                     el.value = blockIndex + 1;
                 } else if (el.type === 'hidden' && el.name.includes('[id]')) {
-                    el.remove(); 
+                    el.remove(); // Remove ID field for new blocks
                 }
             }
         });
 
-        newBlock.querySelectorAll('img').forEach(img => img.remove()); 
-        newBlock.querySelectorAll('input[name*="[existing_image]"]').forEach(input => input.remove()); 
+        newBlock.querySelectorAll('img').forEach(img => img.remove()); // Remove preview images
+        newBlock.querySelectorAll('input[name*="[existing_image]"]').forEach(input => input.remove()); // Remove existing image hidden input
 
         wrapper.appendChild(newBlock);
         blockIndex++;

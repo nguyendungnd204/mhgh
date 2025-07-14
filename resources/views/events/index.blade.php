@@ -50,7 +50,7 @@
                         <tbody>
                             @if (count($events) > 0)
                                 @foreach ($events as $event)
-                                    <tr class="border-t border-gray-200 hover:bg-gray-200 cursor-pointer" onclick="window.location='{{ route('admin.events.show', $event->id) }}'">
+                                    <tr class="border-t border-gray-200 hover:bg-gray-200 cursor-pointer" onclick="window.location.href='{{ route('admin.events.show', $event->id) }}'">
                                         <th class="px-2 py-2 text-gray-800">{{ $event->id }}</th>
                                         <td class="px-2 py-2 text-gray-600">{{ $event->title ?? '' }}</td>
                                         <td class="px-2 py-2 text-gray-600">{{ $event->description ?? '' }}</td>

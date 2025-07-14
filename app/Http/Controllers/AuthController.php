@@ -22,6 +22,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         try {
+            /** @var \\Illuminate\\Http\\Request $request */
             $user = $this->authService->register($request->validated(), $request->ip(), $request->userAgent());
             
             Auth::login($user);
@@ -41,6 +42,7 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
+        /** @var \\Illuminate\\Http\\Request $request */
         try {
             $user = $this->authService->login(
                 $request->validated(),
@@ -76,6 +78,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        /** @var \\Illuminate\\Http\\Request $request */
         $this->authService->logout($request->ip());
         
         $request->session()->invalidate();

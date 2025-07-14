@@ -39,6 +39,7 @@ class RegisterRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        /** @var \\Illuminate\\Http\\Request $this */
         $this->checkRateLimit();
         
         $this->merge([
@@ -49,6 +50,7 @@ class RegisterRequest extends FormRequest
 
     private function checkRateLimit(): void
     {
+        /** @var \\Illuminate\\Http\\Request $this */
         $throttleKey = 'register.' . $this->ip();
         
         if (RateLimiter::tooManyAttempts($throttleKey, 3)) {
@@ -61,6 +63,7 @@ class RegisterRequest extends FormRequest
 
     public function failedValidation($validator): void
     {
+        /** @var \\Illuminate\\Http\\Request $this */
         $throttleKey = 'register.' . $this->ip();
         RateLimiter::hit($throttleKey, 300);
         

@@ -50,7 +50,7 @@
                         <tbody>
                             @if (count($news) > 0)
                                 @foreach ($news as $item)
-                                    <tr class="border-t border-gray-200 hover:bg-gray-200 cursor-pointer" onclick="window.location='{{ route('admin.news.show', $item->id) }}'">
+                                    <tr class="border-t border-gray-200 hover:bg-gray-200 cursor-pointer" onclick="window.location.href='{{ route('admin.news.show', $item->id) }}'">
                                         <th class="px-4 py-3 text-gray-800">{{ $item->id }}</th>
                                         <td class="px-4 py-3 text-gray-600">{{ $item->title ?? '' }}</td>
                                         <td class="px-4 py-3 text-gray-600">{{ $item->description ?? '' }}</td>

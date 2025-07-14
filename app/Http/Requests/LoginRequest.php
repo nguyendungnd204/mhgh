@@ -32,6 +32,7 @@ class LoginRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        /** @var \\Illuminate\\Http\\Request $this */
         $this->checkRateLimit();
         
         $this->merge([
@@ -41,6 +42,7 @@ class LoginRequest extends FormRequest
 
     private function checkRateLimit(): void
     {
+        /** @var \\Illuminate\\Http\\Request $this */
         $throttleKey = 'login.' . $this->ip();
         
         if (RateLimiter::tooManyAttempts($throttleKey, 5)) {

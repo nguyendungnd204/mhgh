@@ -49,4 +49,28 @@ class NewsController extends Controller
 
         return view('news.show', compact('news'));
     }
+
+    public function edit(int $id): View 
+    {
+        $news = $this->newsService->getNewsById($id);
+
+        return view('news.edit', compact('news'));
+    }
+
+    public function update(UpdateEventRequest $request, int $id): RedirectResponse
+    {
+        $news = $this->newsService->getNewsById($id);
+
+        try {
+            $this->newsService->updateNews($news, $request->validated(), $request);
+            
+            return redirect()->route('admin.news.index')
+                           ->with('success', 'Cập nhật sự kiện thành công');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                           ->withInput()
+                           ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
+        }
+    }
+
 }
