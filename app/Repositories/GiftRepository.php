@@ -47,4 +47,9 @@ class GiftRepository
     {
         return $this->model->with($relations);
     }
+
+    public function findWithRelations(int $id, array $relations = [])
+    {
+        return $this->model->with($relations)->findOrFail($id);
+    }
 }

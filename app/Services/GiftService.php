@@ -21,5 +21,12 @@ class GiftService
         return $query->paginate(15);
     }
 
+    public function getGiftCodeById(int $id)
+    {
+        $giftCode = $this->giftRepository->findWithRelations($id);
+
+        return $giftCode;
+    }
+
 
 }

@@ -45,7 +45,7 @@
                         <tbody>
                             @if (count($giftCodes) > 0)
                                 @foreach ($giftCodes as $giftCode)
-                                    <tr class="border-t border-gray-200 hover:bg-gray-200 cursor-pointer" onclick="window.location.href=''">
+                                    <tr class="border-t border-gray-200 hover:bg-gray-200 cursor-pointer" onclick="window.location.href='{{route('amin.giftcode.show', $giftCode->id)}}'">
                                         <th class="px-2 py-2 text-gray-800">{{ $giftCode->id }}</th>
                                         <td class="px-2 py-2 text-gray-600">{{ $giftCode->code ?? '' }}</td>
                                         <td class="px-2 py-2 text-gray-600">{{ $giftCode->reward ?? '' }}</td>

@@ -49,6 +49,7 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
     Route::get('/giftcode', [GiftController::class, 'index'])->name('giftcode.index');
+    Route::get('/giftCode/{id}', [GiftController::class, 'show'])->name('giftcode.show');
 
 });
 
