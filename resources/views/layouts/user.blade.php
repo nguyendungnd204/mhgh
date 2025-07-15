@@ -44,7 +44,6 @@
                         <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl shadow-lg glow-effect bg-black flex items-center justify-center overflow-hidden border border-gold/20">
                             <img src="/ava.jpg" alt="Logo" class="w-full h-full object-cover rounded-xl" />
                         </div>
-
                         <span class="text-lg md:text-xl font-bold text-yellow-500">Mộng Huyền Giang Hồ</span>
                     </a>
                 </div>

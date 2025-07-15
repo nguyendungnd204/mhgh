@@ -2,13 +2,11 @@
 
 @section('content')
 <div class="min-h-screen text-yellow-500 relative">
-    <!-- Background -->
     <div class="fixed inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/30 to-black/90"></div>
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-20"></div>
     </div>
 
-    <!-- Main Container -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-center">
         <div class="w-full max-w-xl">
 
@@ -61,7 +59,7 @@
                             <option value="mobifone" {{ old('card_type') == 'mobifone' ? 'selected' : '' }}>Mobifone</option>
                             <option value="vinaphone" {{ old('card_type') == 'vinaphone' ? 'selected' : '' }}>Vinaphone</option>
                             <option value="vietnamobile" {{ old('card_type') == 'vietnamobile' ? 'selected' : '' }}>Vietnamobile</option>
-                            <option value="gmobile" {{ old('card_type') == 'gmobile' ? 'selected' : '' }}>Gmobile</option>
+                            <option value="garena" {{ old('card_type') == 'garena' ? 'selected' : '' }}>Garena</option>
                         </select>
                         @error('card_type')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -111,7 +109,6 @@
                 </div>
             </div>
 
-            <!-- Additional Info -->
             <div class="mt-6 text-center">
                 <p class="text-gray-400 text-sm">
                     <i class="fas fa-shield-alt mr-1 text-gold"></i>
