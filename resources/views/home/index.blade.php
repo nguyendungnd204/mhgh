@@ -99,9 +99,9 @@
                     <button class="btn-gradient text-white px-3 py-2 md:px-6 md:py-3 rounded-lg font-semibold text-sm md:text-base">
                         <i class="fas fa-desktop mr-1 md:mr-2"></i> NOX
                     </button>
-                    <button class="btn-gradient text-white px-3 py-2 md:px-6 md:py-3 rounded-lg font-semibold text-sm md:text-base">
+                    <a href="{{route('user.transaction')}}" class="btn-gradient text-white px-3 py-2 md:px-6 md:py-3 rounded-lg font-semibold text-sm md:text-base">
                         <i class="fas fa-credit-card mr-1 md:mr-2"></i> Nạp Thẻ
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

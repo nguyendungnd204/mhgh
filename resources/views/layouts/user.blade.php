@@ -36,7 +36,7 @@
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-20"></div>
     </div>
 
-    <nav class="relative z-10 bg-black/80 backdrop-blur-sm border-b border-gold/20">
+    <nav class="relative z-50 bg-black/80 backdrop-blur-sm border-b border-gold/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center gap-3">
@@ -83,7 +83,7 @@
                                     <i class="fas fa-gem mr-2 text-gold"></i>
                                     Thay đổi mật khẩu
                                 </a>
-                                <form method="POST" action="{{ route('logout') }}">
+                                <form method="POST" action="{{ route('logout') }}" class="cursor-pointer">
                                     @csrf
                                     <button type="submit" class="block w-full text-left px-4 py-2 text-white hover:bg-gold/20 transition-colors">
                                         <i class="fas fa-sign-out-alt mr-2 text-red-400"></i>
