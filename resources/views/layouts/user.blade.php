@@ -56,7 +56,7 @@
                     <a href="{{ route('user.transaction') }}" class="text-gold hover:text-gold-light transition-colors duration-200 font-medium">
                         Nạp thẻ
                     </a>
-                    <a href="#" class="text-gold hover:text-gold-light transition-colors duration-200 font-medium">
+                    <a href="{{route('user.history')}}" class="text-gold hover:text-gold-light transition-colors duration-200 font-medium">
                         <i class="fas fa-sword mr-1"></i>
                         Lịch sử
                     </a>

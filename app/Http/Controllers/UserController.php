@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Http\Requests\TransactionRequest;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -28,4 +29,25 @@ class UserController extends Controller
     {
         return view('user.transaction');
     }
+
+    public function history(): View
+    {
+        return view('user.history');
+    }
+
+    // public function storeTransaction(TransactionRequest $request): RedirectResponse
+    // {
+    //     try {
+    //         $this->userService->createTransaction($request->validated(), $request);
+
+    //         return redirect()
+    //             ->route('user.history')
+    //             ->with('success', 'Giao dịch đã được tạo');
+    //     } catch (\Exception $e) {
+    //         return redirect()
+    //             ->back()
+    //             ->withInput()
+    //             ->with('error', 'Có lỗi khi tạo giao dịch'. $e->getMessage());
+    //     }
+    // }
 }

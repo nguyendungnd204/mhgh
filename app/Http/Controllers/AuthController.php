@@ -71,7 +71,7 @@ class AuthController extends Controller
 
         return match (true) {
             $user->isAdmin() => redirect()->route('admin.dashboard'),
-            $user->isUser() => redirect()->route('user.dashboard'),
+            $user->isUser() => redirect()->route('user.transaction'),
             default => redirect()->route('home'),
         };
     }

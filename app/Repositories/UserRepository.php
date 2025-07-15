@@ -7,56 +7,56 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository
 {
-    protected $user;
+    protected $model;
 
-    public function __construct(User $user)
+    public function __construct(User $model)
     {
-        $this->user = $user;
+        $this->model = $model;
     }
 
     public function getQuery(): Builder
     {
-        return $this->user->newQuery();
+        return $this->model->newQuery();
     }
 
     public function create(array $data): User
     {
-        return $this->user->create($data);
+        return $this->model->create($data);
     }
 
     public function findById(int $id): ?User
     {
-        return $this->user->find($id);
+        return $this->model->find($id);
     }
 
     public function findByAccountName(string $accountName): ?User
     {
-        return $this->user->where('account_name', $accountName)->first();
+        return $this->model->where('account_name', $accountName)->first();
     }
 
-    public function update(User $user, array $data): bool
+    public function update(User $model, array $data): bool
     {
-        return $user->update($data);
+        return $model->update($data);
     }
 
-    public function delete(User $user): bool
+    public function delete(User $model): bool
     {
-        return $user->delete();
+        return $model->delete();
     }
 
     public function all(): Collection
     {
-        return $this->user->all();
+        return $this->model->all();
     }
 
     public function paginate(int $perPage = 15)
     {
-        return $this->user->paginate($perPage);
+        return $this->model->paginate($perPage);
     }
 
     public function getByRole(string $role): Collection
     {
-        return $this->user->where('role', $role)->get();
+        return $this->model->where('role', $role)->get();
     }
 
     public function search(Builder $query, string $searchTerm)

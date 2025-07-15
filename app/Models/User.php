@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -49,7 +51,7 @@ class User extends Authenticatable
         ];
     }
 
-     public function isAdmin()
+    public function isAdmin()
     {
         return $this->role === self::ROLE_ADMIN;
     }
@@ -69,7 +71,24 @@ class User extends Authenticatable
         return $value ?? self::ROLE_USER;
     }
 
-    public function events() {
-    return $this->hasMany(Event::class);
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    public function topupTransactions(): HasMany
+    {
+        return $this->hasMany(TopupTransaction::class);
+    }
+
+    public function giftCodes(): BelongsToMany
+    {
+        return $this->belongsToMany(GiftCode::class, 'user_gift_codes')
+                    ->withTimestamps();
+    }
+
+    public function createdGiftCodes(): HasMany
+    {
+        return $this->hasMany(GiftCode::class, 'created_by');
     }
 }

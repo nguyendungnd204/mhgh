@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('response_content')->nullable();
             $table->timestamp('submitted_at');
             $table->timestamp('verified_at')->nullable();
-            $table->boolean('is_manual')->default(false);
+            $table->boolean('is_manual')->default(true);
             $table->timestamps();
         });
     }

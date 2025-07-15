@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GiftController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,11 +48,12 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
+    Route::get('/giftcode', [GiftController::class, 'index'])->name('giftcode.index');
+
 });
 
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
-     Route::get('dashboard', function () {
-        return view('user.dashboard');})->name('dashboard');
 
     Route::get('/transaction', [UserController::class, 'transaction'])->name('transaction');
+    Route::get('/history', [UserController::class, 'history'])->name('history');
 });
