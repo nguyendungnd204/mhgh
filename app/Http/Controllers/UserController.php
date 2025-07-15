@@ -23,4 +23,9 @@ class UserController extends Controller
 
         return view('admin.users.show', compact('user'));
     }
+
+    public function transaction(): View
+    {
+        return view('user.transaction');
+    }
 }

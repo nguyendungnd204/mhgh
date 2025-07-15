@@ -44,7 +44,7 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
     Route::get('news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
     Route::patch('news/{id}', [NewsController::class, 'update'])->name('news.update');
 
-    
+
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
 });
@@ -52,4 +52,6 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
      Route::get('dashboard', function () {
         return view('user.dashboard');})->name('dashboard');
+
+    Route::get('/transaction', [UserController::class, 'transaction'])->name('transaction');
 });
