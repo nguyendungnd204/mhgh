@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -42,6 +43,9 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
     Route::get('news/{id}', [NewsController::class, 'show'])->name('news.show');
     Route::get('news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
     Route::patch('news/{id}', [NewsController::class, 'update'])->name('news.update');
+
+    
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
 });
 

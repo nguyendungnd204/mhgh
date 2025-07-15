@@ -9,7 +9,7 @@ use App\Services\AuthService;
 use App\Services\EventService;
 use App\Services\NewsService;
 use Illuminate\Support\ServiceProvider;
-
+use App\Services\UserService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(UserRepository::class, UserRepository::class);
         $this->app->bind(AuthService::class, AuthService::class);
+        $this->app->bind(UserService::class, UserService::class);
 
         $this->app->bind(EventRepository::class, EventRepository::class);
         $this->app->bind(EventService::class, EventService::class);

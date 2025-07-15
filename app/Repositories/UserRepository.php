@@ -1,25 +1,37 @@
 <?php
-
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository
 {
+    protected $user;
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
+    public function getQuery(): Builder
+    {
+        return $this->user->newQuery();
+    }
+
     public function create(array $data): User
     {
-        return User::create($data);
+        return $this->user->create($data);
     }
 
     public function findById(int $id): ?User
     {
-        return User::find($id);
+        return $this->user->find($id);
     }
 
     public function findByAccountName(string $accountName): ?User
     {
-        return User::where('account_name', $accountName)->first();
+        return $this->user->where('account_name', $accountName)->first();
     }
 
     public function update(User $user, array $data): bool
@@ -34,16 +46,24 @@ class UserRepository
 
     public function all(): Collection
     {
-        return User::all();
+        return $this->user->all();
     }
 
     public function paginate(int $perPage = 15)
     {
-        return User::paginate($perPage);
+        return $this->user->paginate($perPage);
     }
 
     public function getByRole(string $role): Collection
     {
-        return User::where('role', $role)->get();
+        return $this->user->where('role', $role)->get();
+    }
+
+    public function search(Builder $query, string $searchTerm)
+    {
+        return $query->where(function ($q) use ($searchTerm) {
+            $q->where('name', 'like', '%' . $searchTerm . '%')
+              ->orWhere('account_name', 'like', '%' . $searchTerm . '%');
+        });
     }
 }

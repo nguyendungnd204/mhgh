@@ -28,8 +28,8 @@
                 <a href="{{ route('admin.news.index') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                      Quản lý tin tức
                 </a>
-                <a href="{{ route('admin.dashboard') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors {{ request()->routeIs('admin.categories*') ? 'bg-gray-700 text-white' : '' }}">
-                    Categories
+                <a href="{{ route('admin.users.index') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
+                    Quản lý người dùng
                 </a>
                 
                 <a href="{{ route('admin.dashboard') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors {{ request()->routeIs('admin.settings*') ? 'bg-gray-700 text-white' : '' }}">
@@ -69,14 +69,14 @@
             </div>
             
             <nav class="flex-1 px-4 py-6 space-y-2">
-                <a href="{{ route('admin.events.index') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors {{ request()->routeIs('admin.users*') ? 'bg-gray-700 text-white' : '' }}">
+                <a href="{{ route('admin.events.index') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                      Quản lý sự kiện
                 </a>
-                <a href="{{ route('admin.dashboard') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors {{ request()->routeIs('admin.posts*') ? 'bg-gray-700 text-white' : '' }}">
-                     Posts Management
+                <a href="{{ route('admin.news.index') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
+                     Quản lý tin tức
                 </a>
-                <a href="{{ route('admin.dashboard') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors {{ request()->routeIs('admin.categories*') ? 'bg-gray-700 text-white' : '' }}">
-                    Categories
+                <a href="{{ route('admin.users.index') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
+                    Quản lý người dùng
                 </a>
                 <a href="{{ route('admin.dashboard') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors {{ request()->routeIs('admin.settings*') ? 'bg-gray-700 text-white' : '' }}">
                     Settings
