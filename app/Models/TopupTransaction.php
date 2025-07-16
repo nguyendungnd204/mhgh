@@ -9,12 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class TopupTransaction extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'transaction_code',
         'user_id',
-        'server_name',
-        'character_name',
         'user_character_id',
         'card_type',
         'amount',

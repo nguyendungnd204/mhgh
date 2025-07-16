@@ -46,15 +46,17 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
     Route::patch('news/{id}', [NewsController::class, 'update'])->name('news.update');
 
 
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::patch('users/{id}/status', [UserController::class, 'updateStatus'])->name('users.updateStatus');
 
-    Route::get('/giftcode', [GiftController::class, 'index'])->name('giftcode.index');
+    Route::get('giftcode', [GiftController::class, 'index'])->name('giftcode.index');
     Route::get('/giftCode/{id}', [GiftController::class, 'show'])->name('giftcode.show');
 
 });
 
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
 
-    Route::get('/transaction', [UserController::class, 'transaction'])->name('transaction');
-    Route::get('/history', [UserController::class, 'history'])->name('history');
+    Route::get('transaction', [UserController::class, 'transaction'])->name('transaction');
+    Route::get('history', [UserController::class, 'history'])->name('history');
 });

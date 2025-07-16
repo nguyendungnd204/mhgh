@@ -89,4 +89,5 @@ class EventRepository
     {
         return $this->model->where('created_by', $userId);
     }
+
 }

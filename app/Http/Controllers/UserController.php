@@ -6,6 +6,7 @@ use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\TransactionRequest;
+use App\Http\Requests\UpdateUserStatusRequest;
 use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
@@ -50,4 +51,19 @@ class UserController extends Controller
     //             ->with('error', 'Có lỗi khi tạo giao dịch'. $e->getMessage());
     //     }
     // }
+
+    public function updateStatus(int $id): RedirectResponse
+    {
+        try {
+            $this->userService->updateStatus($id);
+
+            return redirect()->route('admin.users.index')
+                ->with('success', 'Thay đổi trạng thái thành công');
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Có lỗi khi thay đổi trạng thái: ' . $e->getMessage());
+        }
+    }
 }

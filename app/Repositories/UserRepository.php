@@ -26,7 +26,7 @@ class UserRepository
 
     public function findById(int $id): ?User
     {
-        return $this->model->find($id);
+        return $this->model->findOrFail($id);
     }
 
     public function findByAccountName(string $accountName): ?User
@@ -65,5 +65,11 @@ class UserRepository
             $q->where('name', 'like', '%' . $searchTerm . '%')
               ->orWhere('account_name', 'like', '%' . $searchTerm . '%');
         });
+    }
+
+    public function updateStatus(User $user)
+    {
+        $user->is_active = !$user->is_active;
+        return $user->save();
     }
 }
