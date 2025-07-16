@@ -65,10 +65,12 @@
                                                 @csrf
                                                 @method('PATCH')
                                                 <button type="submit"
-                                                    class="px-3 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-700 transition-colors text-nowrap">
-                                                    Khoá tài khoản
+                                                    class="px-3 py-1 text-white rounded-md text-sm transition-colors text-nowrap
+            {{ $user->is_active ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700' }}">
+                                                    {{ $user->is_active ? 'Khoá tài khoản' : 'Mở khoá tài khoản' }}
                                                 </button>
                                             </form>
+
                                         </td>
 
                                     </tr>
