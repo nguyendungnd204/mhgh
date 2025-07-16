@@ -25,10 +25,13 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'account_name' => fake()->unique()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => bcrypt('password'), // default password
             'remember_token' => Str::random(10),
+            'role' => 'user',
+            'is_active' => true,
         ];
     }
 

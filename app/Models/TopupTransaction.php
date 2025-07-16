@@ -2,16 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TopupTransaction extends Model
 {
+    use HasFactory;
+    
     protected $fillable = [
         'transaction_code',
         'user_id',
         'server_name',
         'character_name',
+        'user_character_id',
         'card_type',
         'amount',
         'serial',
@@ -33,5 +37,9 @@ class TopupTransaction extends Model
     {
         return $this->belongsTo(User::class);
     }
-}
 
+    public function character(): BelongsTo
+    {
+        return $this->belongsTo(UserCharacter::class, 'user_character_id');
+    }
+}

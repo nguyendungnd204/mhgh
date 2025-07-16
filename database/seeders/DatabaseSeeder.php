@@ -15,9 +15,16 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::factory()
+            ->count(10)
+            ->hasCharacters(2)
+            ->hasTopupTransactions(3)
+            ->create();
+        \App\Models\UserCharacter::factory()->count(10)->create();
+        \App\Models\GiftCode::factory()->count(16)->create();
+        \App\Models\Event::factory()->count(16)->create();
+        \App\Models\News::factory()->count(16)->create();
+        \App\Models\TopupTransaction::factory()->count(16)->create();
+        
     }
 }

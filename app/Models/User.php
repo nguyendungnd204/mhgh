@@ -84,11 +84,18 @@ class User extends Authenticatable
     public function giftCodes(): BelongsToMany
     {
         return $this->belongsToMany(GiftCode::class, 'user_gift_codes')
-                    ->withTimestamps();
+            ->withTimestamps();
     }
 
     public function createdGiftCodes(): HasMany
     {
         return $this->hasMany(GiftCode::class, 'created_by');
     }
+
+    public function characters(): HasMany
+    {
+        return $this->hasMany(UserCharacter::class);
+    }
+
+
 }

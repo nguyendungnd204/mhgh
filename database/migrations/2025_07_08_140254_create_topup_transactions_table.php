@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('transaction_code')->unique();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('server_name');
-            $table->string('character_name');
+            $table->foreignId('user_character_id')->constrained('user_characters')->onDelete('cascade');
             $table->string('card_type');
             $table->integer('amount');
             $table->string('serial');
