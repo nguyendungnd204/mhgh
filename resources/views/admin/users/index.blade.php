@@ -23,9 +23,9 @@
                                 </form>
                             </div>
                             <div class="flex ">
-                                <a href="{{ route('admin.users.index') }}"
+                                <a href="{{ route('admin.register') }}"
                                     class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-nowrap">Thêm
-                                    quản trị viên</a>
+                                   người dùng</a>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                                             {{ $user->is_active ? 'Hoạt động' : 'Đã khoá' }}</td>
                                         <td class="px-2 py-2 text-gray-600">{{ $user->created_at ?? '' }}</td>
                                         <td class="px-2 py-2">
-                                            <form action="{{ route('admin.users.updateStatus', $user->id) }}"
+                                            <form action="{{ route('admin.users.update-status', $user->id) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('PATCH')

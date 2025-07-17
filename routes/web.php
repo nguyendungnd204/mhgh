@@ -27,7 +27,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(function() {
     Route::get('dashboard', function () {
         return view('admin.dashboard');})->name('dashboard');
-
+    
+    Route::get('register', [AuthController::class, 'showCreateUserForm'])->name('register');
 
     Route::get('events', [EventController::class, 'index' ])->name('events.index');
     Route::post('events/store', [EventController::class, 'store' ])->name('events.store');
@@ -48,7 +49,9 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
 
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
-    Route::patch('users/{id}/status', [UserController::class, 'updateStatus'])->name('users.updateStatus');
+    Route::patch('users/{id}/status', [UserController::class, 'updateStatus'])->name('users.update-status');
+    Route::post('/create-user', [AuthController::class, 'createUser'])->name('users.create-user');
+
 
     Route::get('giftcode', [GiftController::class, 'index'])->name('giftcode.index');
     Route::get('/giftCode/{id}', [GiftController::class, 'show'])->name('giftcode.show');
