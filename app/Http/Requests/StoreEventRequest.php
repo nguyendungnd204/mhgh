@@ -46,11 +46,11 @@ class StoreEventRequest extends FormRequest
         ];
     }
 
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'is_active' => $this->has('is_active') ? (bool) $this->is_active : true,
-        ]);
-    }
+    // protected function prepareForValidation(): void
+    // {
+    //     $this->merge([
+    //         'is_active' => $this->has('is_active') ? (bool) $this->is_active : true,
+    //     ]);
+    // }
 }
 

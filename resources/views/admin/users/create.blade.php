@@ -8,7 +8,7 @@
             <div class="bg-white shadow-lg rounded-lg border border-blue-200">
                 <div class="bg-blue-100 text-blue-800 p-4 rounded-t-lg">
                     <h4 class="text-lg font-bold mb-0 flex items-center">
-                        <i class="fas fa-user-plus mr-2"></i> Đăng ký tài khoản
+                        <i class="fas fa-user-plus mr-2"></i> Tạo tài khoản
                     </h4>
                 </div>
                 <div class="p-6">

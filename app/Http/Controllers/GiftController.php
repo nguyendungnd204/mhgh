@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGiftCodeRequest;
 use App\Services\GiftService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -10,18 +13,46 @@ class GiftController extends Controller
 {
     public function __construct(private GiftService $giftService){}
 
-    public function index(Request $request): View
+     public function index(Request $request): View
     {
         $giftCodes = $this->giftService->getAllGiftCode($request);
 
-        return view('admin.giftCode.index', compact('giftCodes'));
+        return view('admin.giftcodes.index', compact('giftCodes'));
     }
 
     public function show(int $id)
     {
         $giftCode = $this->giftService->getGiftCodeById($id);
 
-        return view('admin.giftcode.show', compact('giftCode'));
+        return view('admin.giftcodes.show', compact('giftCode'));
     }
     
+    public function create(): View
+    {
+        return view('admin.giftcodes.create');
+    }
+
+    public function store(StoreGiftCodeRequest $request): RedirectResponse
+    {
+        try {
+            $this->giftService->createGiftCode($request->validated());
+            
+            return redirect()->route('admin.giftcodes.index')
+                           ->with('success', 'Tạo mã quà tặng thành công');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                           ->withInput()
+                           ->with('error', 'Có lỗi khi tạo: ' . $e->getMessage());
+        }
+    }
+
+      public function generateCode(): JsonResponse
+    {
+        try {
+            $code = $this->giftService->generateGiftCode();
+            return response()->json(['code' => $code]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Có lỗi khi tạo mã'], 500);
+        }
+    }
 }

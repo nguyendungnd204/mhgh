@@ -19,10 +19,10 @@
             </p>
             <p class="mb-2"><strong class="font-semibold">Thời gian tạo: </strong>{{ $giftCode->created_at ?? '-' }}</p>
             <p class="mb-2"><strong class="font-semibold">Thời gian hết hạn: </strong>{{ $giftCode->expired_at ?? '-' }}</p>
-            <p class="mb-2"><strong class="font-semibold">Người chỉnh sửa cuối: </strong>{{ $giftCode->created_by->name ?? '-' }}</p>
+            <p class="mb-2"><strong class="font-semibold">Người chỉnh sửa cuối: </strong>{{ $giftCode->creator->name ?? '-' }}</p>
         </div>
                 <div class="mt-6 pt-4 border-t border-gray-200">
-                    <a href="{{ route('admin.giftcode.index') }}" class="inline-block px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors">Quay lại</a>
+                    <a href="{{ route('admin.giftcodes.index') }}" class="inline-block px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors">Quay lại</a>
                 </div>
             </div>
         </div>

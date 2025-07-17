@@ -27,8 +27,7 @@ class GiftRepository
 
     public function search(Builder $query, string $searchTerm): Builder
     {
-        return $query->where(function ($q) use ($searchTerm)
-        {
+        return $query->where(function ($q) use ($searchTerm) {
             $q->where('code', 'like', '%' . $searchTerm . '%');
         });
     }
@@ -52,4 +51,19 @@ class GiftRepository
     {
         return $this->model->with($relations)->findOrFail($id);
     }
+
+    public function generateUniqueCode(int $length = 8): string
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+        do {
+            $code = '';
+            for ($i = 0; $i < $length; $i++) {
+                $code .= $characters[random_int(0, strlen($characters) - 1)];
+            }
+        } while ($this->model->where('code', $code)->exists());
+
+        return $code;
+    }
+
 }
