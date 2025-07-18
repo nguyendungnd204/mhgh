@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="container mx-auto px-4 ">
+    <div class="container  ">
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="bg-gray-100 px-6 py-2 border-b border-gray-200">
                 <div class="flex flex-wrap items-center justify-between">

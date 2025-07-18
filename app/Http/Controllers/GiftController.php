@@ -47,15 +47,15 @@ class GiftController extends Controller
         }
     }
 
-      public function generateCode(): JsonResponse
-    {
-        try {
-            $code = $this->giftService->generateGiftCode();
-            return response()->json(['code' => $code]);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Có lỗi khi tạo mã'], 500);
-        }
-    }
+    //   public function generateCode(): JsonResponse
+    // {
+    //     try {
+    //         $code = $this->giftService->generateGiftCode();
+    //         return response()->json(['code' => $code]);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => 'Có lỗi khi tạo mã'], 500);
+    //     }
+    // }
 
     public function edit(int $id): View
     {

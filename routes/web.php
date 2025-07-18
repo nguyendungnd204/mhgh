@@ -4,6 +4,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GiftController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,12 +55,15 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
 
 
     Route::get('giftcodes', [GiftController::class, 'index'])->name('giftcodes.index');
-    Route::get('/giftcodes/{id}', [GiftController::class, 'show'])->name('giftcodes.show');
     Route::get('giftcodes/create', [GiftController::class, 'create'])->name('giftcodes.create');
+    Route::get('/giftcodes/{id}', [GiftController::class, 'show'])->name('giftcodes.show');
     Route::post('giftcodes', [GiftController::class, 'store'])->name('giftcodes.store');
-    Route::get('giftcodes/generate-code', [GiftController::class, 'generateCode'])->name('giftcodes.generate');
+    // Route::get('giftcodes/generate-code', [GiftController::class, 'generateCode'])->name('giftcodes.generate');
     Route::get('giftcodes/{id}/edit', [GiftController::class, 'edit'])->name('giftcodes.edit');
     Route::patch('giftcodes/{id}', [GiftController::class, 'update'])->name('giftcodes.update');
+
+
+    Route::get('transactions', [TransactionController::class, 'index'])->name('transactions.index');
 
 });
 

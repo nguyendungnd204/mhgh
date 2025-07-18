@@ -61,9 +61,7 @@ class GiftService
 
     public function createGiftCode(array $data): GiftCode
     {
-        if (empty($data['code'])) {
-            $data['code'] = $this->generateGiftCode(rand(10, 12));
-        }
+        $data['code'] = $this->generateGiftCode(rand(10, 12));
         
         $data['created_by'] = Auth::id();
         return $this->giftRepository->create($data);

@@ -35,8 +35,8 @@
                 <a href="{{ route('admin.giftcodes.index') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                     Quản lý quà tặng
                 </a>
-                <a href="{{ route('admin.dashboard') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
-                    Reports
+                <a href="{{ route('admin.transactions.index') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
+                    Quản lý giao dịch
                 </a>
                 <div class="border-t border-gray-700 pt-4 mt-4">
                     <a href="{{ route('home') }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
@@ -81,12 +81,12 @@
                 <a href="{{ route('admin.giftcodes.index') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                     Quản lý quà tặng
                 </a>
-                <a href="{{ route('admin.dashboard') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors {{ request()->routeIs('admin.reports*') ? 'bg-gray-700 text-white' : '' }}">
-                    Reports
+                <a href="{{ route('admin.transactions.index') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
+                    Quản lý giao dịch
                 </a>
                 <div class="border-t border-gray-700 pt-4 mt-4">
                     <a href="{{ route('home') }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
-                        <i class="fas fa-home mr-3"></i> Back to Website
+                        <i class="fas fa-home mr-3"></i> Về trang chủ
                     </a>
                 </div>
             </nav>
