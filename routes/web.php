@@ -65,6 +65,7 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
 
     Route::get('transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::patch('transactions/{id}/status', [TransactionController::class, 'updateStatus'])->name('transactions.update-status');
+    Route::get('transactions/{id}', [TransactionController::class, 'show'])->name('transactions.show');
 
 });
 

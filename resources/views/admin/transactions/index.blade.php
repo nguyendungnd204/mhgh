@@ -47,7 +47,7 @@
                         <tbody>
                             @if (count($transactions) > 0)
                                 @foreach ($transactions as $transaction)
-                                    <tr class="border-t border-gray-200 hover:bg-gray-200">
+                                    <tr class="border-t border-gray-200 hover:bg-gray-200 cursor-pointer" onclick="window.location.href='{{route('admin.transactions.show', $transaction->id)}}'">
                                         <th class="px-2 py-2 text-gray-800">{{ $transaction->id }}</th>
                                         <td class="px-2 py-2 text-gray-600">{{ $transaction->transaction_code ?? '' }}</td>
                                         <td class="px-2 py-2 text-gray-600">{{ $transaction->card_type ?? '' }}</td>

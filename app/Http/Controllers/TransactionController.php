@@ -35,4 +35,11 @@ class TransactionController extends Controller
                 ->with('error', 'Có lỗi khi cập nhật trạng thái giao dịch: ' . $e->getMessage());
         }
     }
+
+    public function show(int $id)
+    {
+        $transaction = $this->transactionService->getTransactionById($id);
+
+        return view('admin.transactions.show', compact('transaction'));
+    }
 }
