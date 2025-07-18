@@ -4,20 +4,25 @@
         <input type="text" id="code" name="code" readonly
                value="{{ old('code') }}"
                class="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-800"
-               placeholder="Nhấn 'Tạo mã'" required />
+               placeholder="Nhấn 'Tạo mã'" />
         <button type="button" id="generateCodeBtn"
                 class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
             Tạo mã
         </button>
     </div>
+    @error('code')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+    @enderror
 </div>
 
 <div class="mb-4">
     <label for="reward" class="block text-sm font-medium text-gray-700">Phần thưởng</label>
     <input type="text" name="reward" id="reward"
            value="{{ old('reward') }}"
-           class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-           required>
+           class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    @error('reward')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+    @enderror
 </div>
 
 <div class="mb-4">
@@ -25,6 +30,9 @@
     <input type="datetime-local" name="expired_at" id="expired_at"
            value="{{ old('expired_at') }}"
            class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    @error('expired_at')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+    @enderror
 </div>
 
 <div class="mb-4">
@@ -33,8 +41,10 @@
            value="{{ old('max_uses') }}"
            class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
            min="1" step="1"
-           required
-           placeholder="Nhập số lượt sử dụng tối đa" required>
+           placeholder="Nhập số lượt sử dụng tối đa">
+    @error('max_uses')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+    @enderror
 </div>
 
 <div class="mb-4">
@@ -44,6 +54,9 @@
         <option value="1" {{ old('is_active', 1) == 1 ? 'selected' : '' }}>Hoạt động</option>
         <option value="0" {{ old('is_active') == '0' ? 'selected' : '' }}>Khóa</option>
     </select>
+    @error('is_active')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+    @enderror
 </div>
 
 <script>

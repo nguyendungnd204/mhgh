@@ -23,12 +23,11 @@ class GiftService
         return $query->paginate(15);
     }
 
-    public function getGiftCodeById(int $id)
+    public function getGiftCodeById(int $id, array $relations = []): ?GiftCode
     {
-        $giftCode = $this->giftRepository->findWithRelations($id);
-
-        return $giftCode;
+        return $this->giftRepository->findWithRelations($id, $relations);
     }
+
 
     public function deactivateExpiredGiftCodes(): void
     {
@@ -68,6 +67,12 @@ class GiftService
         
         $data['created_by'] = Auth::id();
         return $this->giftRepository->create($data);
+    }
+
+    public function updateGiftCode(GiftCode $giftCode, array $data): GiftCode
+    {
+        $data['created_by'] = Auth::id();
+        return $this->giftRepository->update($giftCode, $data);
     }
 
 }

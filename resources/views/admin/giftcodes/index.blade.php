@@ -56,9 +56,9 @@
                                         <td class="px-2 py-2 text-gray-600 {{ $giftCode->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">{{ $giftCode->is_active ? 'Còn hạn' : 'Hết hạn' }}</td>
                                         <td class="px-2 py-2 text-gray-600">{{ $giftCode->created_at ?? '' }}</td>
                                         <td class="px-2 py-2 text-gray-600">{{ $giftCode->expired_at ?? '' }}</td>
-                                        <td class="px-2 py-2 text-gray-600">{{ $giftCode->created_by->name ?? '' }}</td>
+                                        <td class="px-2 py-2 text-gray-600">{{ $giftCode->creator->name ?? '' }}</td>
                                         <td class="px-2 py-2">
-                                             <a href="" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 transition-colors text-nowrap">Chỉnh sửa</a>
+                                             <a href="{{ route('admin.giftcodes.edit', $giftCode->id) }}" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 transition-colors text-nowrap">Chỉnh sửa</a>
                                         </td>
                             
                                     </tr>

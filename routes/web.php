@@ -54,11 +54,12 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
 
 
     Route::get('giftcodes', [GiftController::class, 'index'])->name('giftcodes.index');
-    Route::get('/giftCodes/{id}', [GiftController::class, 'show'])->name('giftcodes.show');
+    Route::get('/giftcodes/{id}', [GiftController::class, 'show'])->name('giftcodes.show');
     Route::get('giftcodes/create', [GiftController::class, 'create'])->name('giftcodes.create');
     Route::post('giftcodes', [GiftController::class, 'store'])->name('giftcodes.store');
     Route::get('giftcodes/generate-code', [GiftController::class, 'generateCode'])->name('giftcodes.generate');
-
+    Route::get('giftcodes/{id}/edit', [GiftController::class, 'edit'])->name('giftcodes.edit');
+    Route::patch('giftcodes/{id}', [GiftController::class, 'update'])->name('giftcodes.update');
 
 });
 

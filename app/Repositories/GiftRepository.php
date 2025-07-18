@@ -66,4 +66,9 @@ class GiftRepository
         return $code;
     }
 
+    public function update(GiftCode $giftCode, array $data): GiftCode
+    {
+        $giftCode->update($data);
+        return $giftCode->refresh();
+    }
 }
