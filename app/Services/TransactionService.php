@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Models\TopupTransaction;
 use App\Repositories\TransactionRepository;
 use Illuminate\Http\Request;
 
@@ -17,5 +18,15 @@ class TransactionService
         }
 
         return $query->latest()->paginate(15);
+    }
+
+    public function getTransactionById(int $id)
+    {
+        return $this->topupTransaction->findById($id);
+    }
+
+    public function updateStatus(TopupTransaction $transaction, string $status)
+    {
+        return $this->topupTransaction->updateStatus($transaction, $status);
     }
 }

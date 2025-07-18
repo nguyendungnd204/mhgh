@@ -26,9 +26,8 @@ class UserService
         return $this->userRepository->findById($id);
     }
 
-    public function updateStatus(int $id)
+    public function updateStatus(User $user)
     {
-        $user = $this->userRepository->findById($id);
         return $this->userRepository->updateStatus($user);
     }
 

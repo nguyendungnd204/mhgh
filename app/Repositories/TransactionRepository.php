@@ -30,4 +30,15 @@ class TransactionRepository
               ->orWhere('card_code', 'like', '%' . $searchTerm . '%');
         });
     }
+
+    public function findById(int $id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    public function updateStatus(TopupTransaction $transaction, string $status)
+    {
+        $transaction->status = $status;
+        return $transaction->save();
+    }
 }

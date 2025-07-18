@@ -17,7 +17,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'account_name' => 'required|string|max:255',
-            'password' => 'required|string|min:6'
+            'password' => 'required|string'
         ];
     }
 
@@ -26,7 +26,6 @@ class LoginRequest extends FormRequest
         return [
             'account_name.required' => 'Tên tài khoản là bắt buộc.',
             'password.required' => 'Mật khẩu là bắt buộc.',
-            'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự.'
         ];
     }
 

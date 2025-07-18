@@ -54,8 +54,9 @@ class UserController extends Controller
 
     public function updateStatus(int $id): RedirectResponse
     {
+        $user = $this->userService->getUserById($id);
         try {
-            $this->userService->updateStatus($id);
+            $this->userService->updateStatus($user);
 
             return redirect()->route('admin.users.index')
                 ->with('success', 'Thay đổi trạng thái thành công');

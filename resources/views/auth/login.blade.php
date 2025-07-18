@@ -49,7 +49,7 @@
                                    class="mt-1 block w-full px-3 py-2 bg-gray-900 text-white border rounded-md shadow-sm focus:outline-none focus:border-yellow-400 @error('password') border-red-500 @enderror"
                                    required
                                    autocomplete="current-password"
-                                   minlength="6">
+                                   >
                             <button type="button" 
                                     id="togglePassword"
                                     class="absolute inset-y-0 right-0 px-3 py-2 text-gray-400 hover:text-yellow-400">

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\updateStatusTransactionRequest;
 use App\Services\TransactionService;
+use Exception;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -15,5 +17,22 @@ class TransactionController extends Controller
 
         // dd($transactions);
         return view('admin.transactions.index', compact('transactions'));
+    }
+
+    public function updateStatus(updateStatusTransactionRequest $request, int $id)
+    {
+        $transaction = $this->transactionService->getTransactionById($id);
+
+        try {
+            $this->transactionService->updateStatus($transaction, $request['status']);
+            return redirect()
+                ->route('admin.transactions.index')
+                ->with('success', 'Trạng thái giao dịch đã được cập nhật thành công');
+        } catch (Exception $e) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Có lỗi khi cập nhật trạng thái giao dịch: ' . $e->getMessage());
+        }
     }
 }

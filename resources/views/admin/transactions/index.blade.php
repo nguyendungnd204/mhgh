@@ -12,13 +12,13 @@
                             <div class="w-full md:w-45">
                                 <form class="flex gap-2" role="search" action="{{route('admin.transactions.index')}}" method="get">
                                     @csrf
-                                    <input class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500" name="search" type="search" placeholder="mã code" aria-label="Search">
+                                    <input class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500" name="search" type="search" placeholder="mã giao dịch, mã thẻ..." aria-label="Search">
                                     <button class="px-2 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-nowrap" type="submit">Tìm kiếm</button>
                                 </form>
                             </div>
-                            <div class="flex ">
+                            {{-- <div class="flex ">
                                 <a href="" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-nowrap">Thêm mã quà tặng</a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         <tbody>
                             @if (count($transactions) > 0)
                                 @foreach ($transactions as $transaction)
-                                    <tr class="border-t border-gray-200 hover:bg-gray-200 cursor-pointer" onclick="window.location.href=">
+                                    <tr class="border-t border-gray-200 hover:bg-gray-200">
                                         <th class="px-2 py-2 text-gray-800">{{ $transaction->id }}</th>
                                         <td class="px-2 py-2 text-gray-600">{{ $transaction->transaction_code ?? '' }}</td>
                                         <td class="px-2 py-2 text-gray-600">{{ $transaction->card_type ?? '' }}</td>
@@ -77,14 +77,25 @@
                                         </td>
 
                                         <td class="px-2 py-2">
-                                             <a href="" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 transition-colors text-nowrap">Chỉnh sửa</a>
+                                            <form action="{{ route('admin.transactions.update-status', $transaction->id) }}" method="POST" class="inline-block">
+                                                @csrf
+                                                @method('PATCH')
+                                                <select name="status" onchange="this.form.submit()" class="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 
+                                                    {{ $transaction->status == 'pending' ? 'bg-yellow-50 text-yellow-800' : '' }}
+                                                    {{ $transaction->status == 'success' ? 'bg-green-50 text-green-800' : '' }}
+                                                    {{ $transaction->status == 'failed' ? 'bg-red-50 text-red-800' : '' }}">
+                                                    <option value="pending" {{ $transaction->status == 'pending' ? 'selected' : '' }}>Đang xử lý</option>
+                                                    <option value="success" {{ $transaction->status == 'success' ? 'selected' : '' }}>Thành công</option>
+                                                    <option value="failed" {{ $transaction->status == 'failed' ? 'selected' : '' }}>Thất bại</option>
+                                                </select>
+                                            </form>
                                         </td>
                             
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="10" class="text-center px-2 py-1 text-gray-600">Chưa có giao dịch nào</td>
+                                    <td colspan="12" class="text-center px-2 py-1 text-gray-600">Chưa có giao dịch nào</td>
                                 </tr>
                             @endif
                         </tbody>
@@ -96,4 +107,24 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.querySelectorAll('select[name="status"]').forEach(function(select) {
+            select.addEventListener('change', function(e) {
+                const statusText = {
+                    'pending': 'Đang xử lý',
+                    'success': 'Thành công',
+                    'failed': 'Thất bại'
+                };
+                
+                const confirmed = confirm('Bạn có chắc chắn muốn thay đổi trạng thái giao dịch thành "' + statusText[this.value] + '"?');
+                
+                if (!confirmed) {
+                    this.value = this.defaultValue;
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
 @endsection
