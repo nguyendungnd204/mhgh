@@ -2,13 +2,11 @@
 
 @section('content')
 <div class="min-h-screen text-yellow-500 relative">
-    <!-- Background -->
     <div class="fixed inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/30 to-black/90"></div>
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-20"></div>
     </div>
 
-    <!-- Main Container -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-center">
         <div class="w-full max-w-3xl">
             <div class="card-bg rounded-2xl border border-gold/30 shadow-2xl glow-effect">
@@ -20,7 +18,6 @@
                 </div>
 
                 <div class="p-6">
-                    <!-- Table for Transaction History -->
                     <div class="overflow-x-auto">
                         <table class="w-full text-white">
                             <thead>
@@ -35,38 +32,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-b border-gold/20 hover:bg-gray-800/70 transition-colors">
-                                    <td class="py-2 px-4">[s1] Thánh Giống</td>
-                                    <td class="py-2 px-4">NguyenVanA</td>
-                                    <td class="py-2 px-4">Viettel</td>
-                                    <td class="py-2 px-4">1234567890</td>
-                                    <td class="py-2 px-4">9876543210</td>
-                                    <td class="py-2 px-4">2025-07-15 13:46</td>
-                                    <td class="py-2 px-4 text-green-400">Thành công</td>
-                                </tr>
-                                <tr class="border-b border-gold/20 hover:bg-gray-800/70 transition-colors">
-                                    <td class="py-2 px-4">[s2] Thiên Long</td>
-                                    <td class="py-2 px-4">TranThiB</td>
-                                    <td class="py-2 px-4">Mobifone</td>
-                                    <td class="py-2 px-4">0987654321</td>
-                                    <td class="py-2 px-4">1234509876</td>
-                                    <td class="py-2 px-4">2025-07-14 09:15</td>
-                                    <td class="py-2 px-4 text-red-400">Thất bại</td>
-                                </tr>
-                                <tr class="border-b border-gold/20 hover:bg-gray-800/70 transition-colors">
-                                    <td class="py-2 px-4">[s3] Minh Giáo</td>
-                                    <td class="py-2 px-4">LeVanC</td>
-                                    <td class="py-2 px-4">Vinaphone</td>
-                                    <td class="py-2 px-4">5678901234</td>
-                                    <td class="py-2 px-4">4321098765</td>
-                                    <td class="py-2 px-4">2025-07-13 14:30</td>
-                                    <td class="py-2 px-4 text-green-400">Thành công</td>
-                                </tr>
+                                @if(count($transactions) > 0)
+                                    @foreach($transactions as $transaction)
+                                        <tr class="border-b border-gold/20 hover:bg-gray-800/70 transition-colors">
+                                            <td class="py-2 px-4">{{$transaction->character->server_name}}</td>
+                                            <td class="py-2 px-4">{{$transaction->character->character_name}}</td>
+                                            <td class="py-2 px-4">{{$transaction->card_type}}</td>
+                                            <td class="py-2 px-4">{{$transaction->serial}}</td>
+                                            <td class="py-2 px-4">{{$transaction->card_code}}</td>
+                                            <td class="py-2 px-4">{{$transaction->submitted_at}}</td>
+                                            <td class="py-2 px-4 text-green-400">
+                                                {{ 
+                                                    [
+                                                        'pending' => 'Đang xử lý',
+                                                        'success' => 'Thành công',
+                                                        'failed' => 'Thất bại'
+                                                    ] [$transaction->status] ?? 'Không rõ'
+                                                }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="10" class="text-center px-2 py-1 text-gray-100">Bạn chưa có giao dịch nào</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
 
-                    <!-- Footer Info -->
                     <div class="px-6 pb-6 mt-6">
                         <div class="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
                             <div class="flex items-center text-blue-300 text-sm">
@@ -78,7 +72,6 @@
                 </div>
             </div>
 
-            <!-- Additional Info -->
             <div class="mt-6 text-center">
                 <p class="text-gray-400 text-sm">
                     <i class="fas fa-shield-alt mr-1 text-gold"></i>

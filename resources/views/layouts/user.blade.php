@@ -82,7 +82,7 @@
                                     <i class="fas fa-gem mr-2 text-gold"></i>
                                     Thay đổi mật khẩu
                                 </a>
-                                <form method="POST" action="{{ route('logout') }}" class="cursor-pointer">
+                                <form method="POST" action="{{ route('logout') }}" class="cursor-pointer" onsubmit="return confirmLogout()">
                                     @csrf
                                     <button type="submit" class="block w-full text-left px-4 py-2 text-white hover:bg-gold/20 transition-colors">
                                         <i class="fas fa-sign-out-alt mr-2 text-red-400"></i>
@@ -116,7 +116,7 @@
                         <div class="px-3 py-2 text-gold">
                             <i class="fas fa-user mr-1"></i> {{ auth()->user()->name }}
                         </div>
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('logout') }}" >
                             @csrf
                             <button type="submit" class="block w-full text-left px-3 py-2 text-gold hover:text-gold-light">
                                 <i class="fas fa-sign-out-alt mr-1"></i> Đăng Xuất
@@ -154,50 +154,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <!-- <footer class="relative z-10 bg-black/80 border-t border-gold/20 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-gold font-bold text-lg mb-4">Mộng Huyền Giang Hồ</h3>
-                    <p class="text-gray-400 text-sm">Thiên hạ đệ nhất bang - Khám phá thế giới võ lâm huyền bí</p>
-                </div>
-                <div>
-                    <h4 class="text-gold font-semibold mb-4">Liên Kết</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Trang Chủ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Tin Tức</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Hướng Dẫn</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Hỗ Trợ</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-gold font-semibold mb-4">Cộng Đồng</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Facebook</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Discord</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">YouTube</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Forum</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-gold font-semibold mb-4">Tải Game</h4>
-                    <div class="space-y-2">
-                        <a href="#" class="block bg-gold/20 hover:bg-gold/30 text-gold px-4 py-2 rounded text-sm transition-colors">
-                            <i class="fab fa-android mr-2"></i>Android
-                        </a>
-                        <a href="#" class="block bg-gold/20 hover:bg-gold/30 text-gold px-4 py-2 rounded text-sm transition-colors">
-                            <i class="fab fa-apple mr-2"></i>iOS
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gold/20 mt-8 pt-8 text-center text-gray-400 text-sm">
-                <p>© 2024 Mộng Huyền Giang Hồ. Tất cả quyền được bảo lưu.</p>
-            </div>
-        </div>
-    </footer> -->
-
     @stack('scripts')
 
     <script>
@@ -211,7 +167,6 @@
             mobileMenu.classList.toggle('hidden');
         }
 
-        // Close dropdowns when clicking outside
         document.addEventListener('click', function(event) {
             const userMenu = document.getElementById('user-menu');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -225,7 +180,6 @@
             }
         });
 
-        // Auto-hide flash messages after 5 seconds
         setTimeout(() => {
             document.querySelectorAll('[role="alert"]').forEach(alert => {
                 alert.style.transition = 'opacity 0.5s ease';
@@ -233,6 +187,10 @@
                 setTimeout(() => alert.remove(), 500);
             });
         }, 5000);
+
+         function confirmLogout() {
+            return confirm('Bạn có chắc chắn muốn đăng xuất?');
+        }
     </script>
 </body>
 

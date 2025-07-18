@@ -71,6 +71,6 @@ Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(
 
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
 
-    Route::get('transaction', [UserController::class, 'transaction'])->name('transaction');
-    Route::get('history', [UserController::class, 'history'])->name('history');
+    Route::get('transaction', [TransactionController::class, 'transaction'])->name('transaction');
+    Route::get('history', [TransactionController::class, 'history'])->name('history');
 });

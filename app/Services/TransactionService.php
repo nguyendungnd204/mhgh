@@ -29,4 +29,9 @@ class TransactionService
     {
         return $this->topupTransaction->updateStatus($transaction, $status);
     }
+
+    public function getAllById(int $id, array $relations = [])
+    {
+        return $this->topupTransaction->getAllById($id, $relations);
+    }
 }

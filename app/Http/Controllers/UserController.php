@@ -26,15 +26,8 @@ class UserController extends Controller
         return view('admin.users.show', compact('user'));
     }
 
-    public function transaction(): View
-    {
-        return view('user.transaction');
-    }
 
-    public function history(): View
-    {
-        return view('user.history');
-    }
+
 
     // public function storeTransaction(TransactionRequest $request): RedirectResponse
     // {
@@ -57,7 +50,6 @@ class UserController extends Controller
         $user = $this->userService->getUserById($id);
         try {
             $this->userService->updateStatus($user);
-
             return redirect()->route('admin.users.index')
                 ->with('success', 'Thay đổi trạng thái thành công');
         } catch (\Exception $e) {

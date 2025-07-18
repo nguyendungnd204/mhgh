@@ -41,4 +41,9 @@ class TransactionRepository
         $transaction->status = $status;
         return $transaction->save();
     }
+
+    public function getAllById(int $id, array $relations = [])
+    {
+        return $this->model->with($relations)->where('id', $id)->get();
+    }
 }
