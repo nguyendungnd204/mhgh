@@ -32,7 +32,7 @@
                                id="account_name" 
                                name="account_name"
                                value="{{ old('account_name') }}"
-                               class="mt-1 block w-full px-3 py-2 bg-gray-900 text-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-yellow-400 @error('account_name') border-red-500 @enderror"
+                               class="mt-1 block w-full px-3 py-2 bg-gray-900 text-white border  rounded-md shadow-sm focus:outline-none focus:border-yellow-400 @error('account_name') border-red-500 @enderror"
                                required
                                autocomplete="username"
                                maxlength="255">
@@ -46,7 +46,7 @@
                             <input type="password" 
                                    id="password" 
                                    name="password"
-                                   class="mt-1 block w-full px-3 py-2 bg-gray-900 text-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-yellow-400 @error('password') border-red-500 @enderror"
+                                   class="mt-1 block w-full px-3 py-2 bg-gray-900 text-white border rounded-md shadow-sm focus:outline-none focus:border-yellow-400 @error('password') border-red-500 @enderror"
                                    required
                                    autocomplete="current-password"
                                    minlength="6">

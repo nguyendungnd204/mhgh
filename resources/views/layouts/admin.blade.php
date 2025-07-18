@@ -22,6 +22,9 @@
                 </a>
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2">
+                 <a href="{{ route('admin.dashboard') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
+                    Bảng điều khiển
+                </a>
                 <a href="{{ route('admin.events.index') ?? '#' }}" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                      Quản lý sự kiện
                 </a>
