@@ -111,5 +111,10 @@ class EventRepository
         return $this->model->where('is_active', true)->orderBy('start_date', 'desc')->paginate($limit);
     }
 
+    public function getActiveEventById(int $id): ?Event
+    {
+        return $this->model->where('id', $id)->where('is_active', true)->first();
+    }
+
     
 }

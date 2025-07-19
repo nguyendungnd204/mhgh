@@ -18,10 +18,8 @@
         </button>
     </div>
     
-    <!-- News Container -->
     <div id="newsContainer" class="space-y-4">
         
-        {{-- Events Section --}}
         <div class="news-section events-section transition-opacity duration-500 ease-in-out">
             @forelse ($events as $item)
                 <div class="news-item bg-gray-800/50 hover:bg-gray-800/70 rounded-lg p-4 border-l-4 border-yellow-400 transition-all duration-300 cursor-pointer transform hover:scale-[1.02] hover:shadow-lg mb-4">
@@ -39,13 +37,11 @@
                     <p class="text-gray-400">Chưa có sự kiện nào!</p>
                 </div>
             @endforelse
-            {{-- Pagination for events --}}
             <div class="mt-4">
                 {{ $events->withQueryString()->links() }}
             </div>
         </div>
 
-        {{-- News Section --}}
         <div class="news-section hidden transition-opacity duration-500 ease-in-out">
             @forelse ($news as $item)
                 <div class="news-item bg-gray-800/50 hover:bg-gray-800/70 rounded-lg p-4 border-l-4 border-yellow-400 transition-all duration-300 cursor-pointer transform hover:scale-[1.02] hover:shadow-lg mb-4">
@@ -63,7 +59,6 @@
                     <p class="text-gray-400">Chưa có tin tức nào!</p>
                 </div>
             @endforelse
-            {{-- Pagination for news --}}
             <div class="mt-4">
                 {{ $news->withQueryString()->links() }}
             </div>

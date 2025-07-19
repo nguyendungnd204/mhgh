@@ -9,7 +9,6 @@ use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
 class AuthController extends Controller
 {
     public function __construct(private AuthService $authService) {}
@@ -34,7 +33,7 @@ class AuthController extends Controller
             /** @var \Illuminate\Http\Request $request */
             $this->authService->register($request->validated(), $request->ip(), $request->userAgent(), true);
             $request->session()->regenerate();
-                        
+
             return redirect()->route('dashboard')->with('success', 'Đăng ký tài khoản thành công');
         } catch (\Exception $e) {
             return back()->withErrors([
@@ -52,7 +51,7 @@ class AuthController extends Controller
         try {
             /** @var \Illuminate\Http\Request $request */
             $user = $this->authService->register($request->validated(), $request->ip(), $request->userAgent(), false);
-            
+
             return redirect()->route('admin.users.index')->with('success', 'Tạo tài khoản thành công cho: ' . $user->account_name);
         } catch (\Exception $e) {
             return back()->withErrors([
@@ -68,8 +67,8 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        /** @var \Illuminate\Http\Request $request */
         try {
+             /** @var \Illuminate\Http\Request $request */
             $this->authService->login(
                 $request->validated(),
                 $request->filled('remember'),
@@ -78,14 +77,17 @@ class AuthController extends Controller
             );
 
             $request->session()->regenerate();
-                         
-            return $this->dashboard();
+
+
+            return redirect()->intended(route('dashboard'));
         } catch (\Exception $e) {
             return back()->withErrors([
                 'account_name' => $e->getMessage(),
-            ])->withInput($request->only('account_name'));
+                'password' => $e->getMessage(),
+            ])->withInput();
         }
     }
+
 
     public function dashboard()
     {
@@ -106,7 +108,7 @@ class AuthController extends Controller
     {
         /** @var \Illuminate\Http\Request $request */
         $this->authService->logout($request->ip());
-                 
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
@@ -122,9 +124,9 @@ class AuthController extends Controller
     {
         try {
             $data = $request->validated();
-            $this->authService->changePassword( 
-                Auth::user(), 
-                $data['current_password'], 
+            $this->authService->changePassword(
+                Auth::user(),
+                $data['current_password'],
                 $data['password']
             );
             return redirect()->route('edit-password')->with('success', 'Đổi mật khẩu thành công');

@@ -52,10 +52,10 @@
                         <a href="{{ route('home') }}" class="flex items-center text-xl font-bold">
                             <i class="fas fa-home mr-2 hover:text-yellow-300"></i>
                         </a>
-                        <a href="{{ route('home') }}" class="flex items-center px-3 py-2 text-yellow-400 font-bold hover:text-yellow-300">
+                        <a href="{{ route('news') }}" class="flex items-center px-3 py-2 text-yellow-400 font-bold hover:text-yellow-300">
                             Tin tức
                         </a>
-                        <a href="{{ route('home') }}" class="flex items-center px-3 py-2 text-yellow-400 font-bold hover:text-yellow-300">
+                        <a href="{{ route('events') }}" class="flex items-center px-3 py-2 text-yellow-400 font-bold hover:text-yellow-300">
                             Sự kiện
                         </a>
                         <a href="{{ route('home') }}" class="flex items-center px-3 py-2 text-yellow-400 font-bold hover:text-yellow-300">
@@ -66,6 +66,13 @@
                         </a>
                         <a href="{{ route('home') }}" class="flex items-center px-3 py-2 text-yellow-400 font-bold hover:text-yellow-300">
                             Group
+                        </a>
+
+                         <a href="{{ route('register') }}" class="flex items-center px-3 py-2 text-yellow-400 font-bold hover:text-yellow-300">
+                            Đăng ký
+                        </a>
+                        <a href="{{ route('login') }}" class="flex items-center px-3 py-2 text-yellow-400 font-bold hover:text-yellow-300">
+                            Đăng nhập
                         </a>
                     </div>
 

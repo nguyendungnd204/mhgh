@@ -14,12 +14,17 @@ use Illuminate\Support\Facades\Route;
 //     return view('home.index');
 // })->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('news', [HomeController::class, 'news'])->name('news');
+Route::get('events', [HomeController::class, 'events'])->name('events');
+Route::get('news/{id}', [HomeController::class, 'showNews'])->name('news.show');
+Route::get('events/{id}', [HomeController::class, 'showEvent'])->name('events.show');
 
 Route::middleware('guest')->group(function() {
     Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register');
     Route::post('register', [AuthController::class, 'register'])->name('register');
     Route::post('login', [AuthController::class, 'login']);
     Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+    
 });
 
 

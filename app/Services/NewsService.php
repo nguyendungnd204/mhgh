@@ -216,5 +216,10 @@ class NewsService
         return $this->newsRepository->getNewsActive($limit);
     }
 
+    public function getActiveNewsById(int $id): ?News
+    {
+        return $this->newsRepository->getActiveNewsById($id);
+    }
+
     
 }

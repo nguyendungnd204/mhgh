@@ -229,5 +229,10 @@ class EventService
         return $this->eventRepository->getEventsActive($limit);
     }
 
+    public function getActiveEventById(int $id): ?Event
+    {
+        return $this->eventRepository->getActiveEventById($id);
+    }
+
 
 }

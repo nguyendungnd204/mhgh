@@ -101,5 +101,8 @@ class NewsRepository
         return $this->model->where('is_active', true)->orderBy('created_at', 'desc')->paginate($limit);
     }
    
-   
+    public function getActiveNewsById(int $id): ?News
+    {
+        return $this->model->where('id', $id)->where('is_active', true)->first();
+    }
 }
