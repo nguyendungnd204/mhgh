@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\News;
 use App\Repositories\NewsRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,7 @@ class NewsService
     }
     public function getAllNews(Request $request)
     {
-        $query = $this->newsRepository->getQuerywithRelations(['user', 'contentBlocks']);
+        $query = $this->newsRepository->getQuerywithRelations(['user', 'contentBlocks'])->orderBy('created_at', 'desc');
 
         if($request->filled('search')) 
         {
@@ -209,4 +210,11 @@ class NewsService
     {
         return $this->newsRepository->count();
     }
+
+    public function getActiveNews(int $limit)
+    {
+        return $this->newsRepository->getNewsActive($limit);
+    }
+
+    
 }

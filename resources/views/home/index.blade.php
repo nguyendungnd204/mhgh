@@ -22,13 +22,13 @@
         right: 0;
         bottom: 0;
         display: flex;
-        align-items: flex-end; /* Align content to the bottom */
+        align-items: flex-end; 
         justify-content: center;
-        padding-bottom: 20px; /* Add some padding at the bottom */
+        padding-bottom: 20px; 
     }
 
     .floating-content {
-        margin-top: 40px; /* Move the news section down as per provided file */
+        margin-top: 40px; 
         z-index: 10;
     }
 
@@ -36,24 +36,24 @@
         display: flex;
         flex-direction: row;
         gap: 20px;
-        align-items: stretch; /* Ensure equal height for children */
+        align-items: stretch; 
     }
 
     .sidebar, .main-content {
-        flex: 1; /* Each takes 50% of the container width */
-        min-width: 0; /* Prevent overflow */
+        flex: 1;
+        min-width: 0; 
     }
 
     .hot-event-image {
         width: 100%;
-        height: 100%; /* Fill the container height */
-        object-fit: cover; /* Ensure image covers the area without distortion */
-        border-radius: 12px; /* Match glass-effect rounded corners */
-        border: 1px solid rgba(255, 255, 255, 0.2); /* Match glass-effect border */
+        height: 100%; 
+        object-fit: cover; 
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.2); 
     }
 
     .sidebar .glass-effect, .main-content .glass-effect {
-        height: 100%; /* Ensure both sections are the same height */
+        height: 100%; 
         display: flex;
         flex-direction: column;
     }
@@ -70,10 +70,8 @@
 @endpush
 
 @section('content')
-    <!-- Hero Section với Background Image -->
     <div class="hero-bg relative overflow-hidden">
         <div class="hero-overlay">
-            <!-- Game Logo và Thông tin -->
             <div class="text-center z-10 p-4 w-full">
                 <div class="flex flex-col md:flex-row items-center justify-center mb-6">
                     <div class="w-20 h-20 mb-4 md:mb-0 md:mr-6 flex items-center justify-center glow-effect ">
@@ -85,7 +83,6 @@
                     </div>
                 </div>
                 
-                <!-- Download Buttons -->
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mt-6">
                     <button class="btn-gradient text-white px-3 py-2 md:px-6 md:py-3 rounded-lg font-semibold text-sm md:text-base">
                         <i class="fab fa-android mr-1 md:mr-2"></i> Tải Android
@@ -107,11 +104,9 @@
         </div>
     </div>
 
-    <!-- Content Section nổi lên -->
     <div class="floating-content relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="content-container">
-                <!-- Hot Events Sidebar -->
                 <div class="sidebar">
                     <div class="glass-effect rounded-2xl p-6 md:p-8 shadow-2xl">
                         <h2 class="text-2xl md:text-3xl font-bold text-yellow-400 mb-6 text-center">
@@ -122,9 +117,8 @@
                     </div>
                 </div>
 
-                <!-- Main News Section -->
                 <div class="main-content">
-                    @include('home.news')
+                    @include('home.menu')
                 </div>
             </div>
         </div>
@@ -133,7 +127,6 @@
 
 @push('scripts')
 <script>
-    // Smooth scrolling effect for floating content
     document.addEventListener('DOMContentLoaded', function() {
         const floatingContent = document.querySelector('.floating-content');
         
@@ -141,7 +134,7 @@
             const scrolled = window.pageYOffset;
             const rate = scrolled * -0.2;
             if (floatingContent) {
-                floatingContent.style.transform = `translateY(${40 + rate}px)`; /* Adjusted to account for new margin */
+                floatingContent.style.transform = `translateY(${40 + rate}px)`; 
             }
         });
     });

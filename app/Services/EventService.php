@@ -223,4 +223,11 @@ class EventService
     {
         return $this->eventRepository->count();
     }
+
+    public function getActiveEvents(int $limit)
+    {
+        return $this->eventRepository->getEventsActive($limit);
+    }
+
+
 }

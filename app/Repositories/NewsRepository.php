@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\News;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -94,4 +95,11 @@ class NewsRepository
     {
         return $this->model->count();
     }
+
+    public function getNewsActive($limit = 5): LengthAwarePaginator
+    {
+        return $this->model->where('is_active', true)->orderBy('created_at', 'desc')->paginate($limit);
+    }
+   
+   
 }

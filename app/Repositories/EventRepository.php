@@ -105,4 +105,11 @@ class EventRepository
     {
         return $this->model->count();
     }
+
+    public function getEventsActive(int $limit = 5): LengthAwarePaginator
+    {
+        return $this->model->where('is_active', true)->orderBy('start_date', 'desc')->paginate($limit);
+    }
+
+    
 }
