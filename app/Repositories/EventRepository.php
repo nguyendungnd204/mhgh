@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -90,4 +91,18 @@ class EventRepository
         return $this->model->where('created_by', $userId);
     }
 
+    public function getUpcomingEvents(): Collection
+    {
+        return $this->model
+            ->where('start_date', '>', now())
+            ->orderBy('start_date')
+            ->limit(5)
+            ->get();
+    }
+
+
+    public function count(): int
+    {
+        return $this->model->count();
+    }
 }

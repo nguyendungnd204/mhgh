@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Event;
 use App\Repositories\EventRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -211,5 +212,15 @@ class EventService
             }
             $block->delete();
         }
+    }
+
+    public function getUpcomingEvents(): Collection
+    {
+        return $this->eventRepository->getUpcomingEvents();
+    }
+
+    public function count(): int
+    {
+        return $this->eventRepository->count();
     }
 }

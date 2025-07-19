@@ -89,4 +89,9 @@ class NewsRepository
     {
         return $this->model->where('created_by', $userId);
     }
+
+    public function count(): int
+    {
+        return $this->model->count();
+    }
 }

@@ -34,4 +34,14 @@ class TransactionService
     {
         return $this->topupTransaction->getAllById($id, $relations);
     }
+
+    public function getTransactionsRecentlyCreated(int $days = 7)
+    {
+        return $this->topupTransaction->getTransactionsRecentlyCreated($days);
+    }
+
+    public function count(): int
+    {
+        return $this->topupTransaction->count();
+    }
 }

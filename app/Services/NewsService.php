@@ -204,4 +204,9 @@ class NewsService
             $block->delete();
         }
     }
+
+    public function count(): int
+    {
+        return $this->newsRepository->count();
+    }
 }

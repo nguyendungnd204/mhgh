@@ -73,4 +73,9 @@ class GiftService
         return $this->giftRepository->update($giftCode, $data);
     }
 
+    public function count(): int
+    {
+        return $this->giftRepository->count();
+    }
+
 }

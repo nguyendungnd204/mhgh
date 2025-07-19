@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -26,8 +27,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(function() {
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');})->name('dashboard');
+    
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     Route::get('register', [AuthController::class, 'showCreateUserForm'])->name('register');
 

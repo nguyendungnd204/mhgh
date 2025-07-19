@@ -72,4 +72,9 @@ class UserRepository
         $user->is_active = !$user->is_active;
         return $user->save();
     }
+
+    public function count(): int
+    {
+        return $this->model->count();
+    }
 }

@@ -32,4 +32,9 @@ class UserService
     }
 
     // public function createUser($data, Request $request): 
+
+    public function count(): int
+    {
+        return $this->userRepository->count();
+    }
 }

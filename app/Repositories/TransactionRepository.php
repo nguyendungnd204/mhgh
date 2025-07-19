@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\TopupTransaction;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class TransactionRepository
 {
@@ -26,8 +28,8 @@ class TransactionRepository
     {
         return $query->where(function ($q) use ($searchTerm) {
             $q->where('transaction_code', 'like', '%' . $searchTerm . '%')
-              ->orWhere('serial', 'like', '%' . $searchTerm . '%')
-              ->orWhere('card_code', 'like', '%' . $searchTerm . '%');
+                ->orWhere('serial', 'like', '%' . $searchTerm . '%')
+                ->orWhere('card_code', 'like', '%' . $searchTerm . '%');
         });
     }
 
@@ -45,5 +47,19 @@ class TransactionRepository
     public function getAllById(int $id, array $relations = [])
     {
         return $this->model->with($relations)->where('id', $id)->get();
+    }
+
+    public function getTransactionsRecentlyCreated(int $days = 7): Collection
+    {
+        return $this->model
+            ->where('submitted_at', '>=', now()->subDays($days))
+            ->orderByDesc('submitted_at')
+            ->limit(5)
+            ->get();
+    }
+
+    public function count(): int
+    {
+        return $this->model->count();
     }
 }
