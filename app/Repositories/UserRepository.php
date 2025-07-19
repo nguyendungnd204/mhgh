@@ -77,4 +77,10 @@ class UserRepository
     {
         return $this->model->count();
     }
+
+    public function updatePassword(User $user, string $password): bool
+    {
+        $user->password = bcrypt($password);
+        return $user->save();
+    }
 }

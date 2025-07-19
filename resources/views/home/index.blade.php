@@ -124,7 +124,7 @@
 
                 <!-- Main News Section -->
                 <div class="main-content">
-                    @include('news')
+                    @include('home.news')
                 </div>
             </div>
         </div>

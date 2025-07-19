@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UpdatedPasswordRequest;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,7 @@ class AuthController extends Controller
     {
         try {
             /** @var \Illuminate\Http\Request $request */
-            $user = $this->authService->register($request->validated(), $request->ip(), $request->userAgent(), true);
+            $this->authService->register($request->validated(), $request->ip(), $request->userAgent(), true);
             $request->session()->regenerate();
                         
             return redirect()->route('dashboard')->with('success', 'Đăng ký tài khoản thành công');
@@ -69,7 +70,7 @@ class AuthController extends Controller
     {
         /** @var \Illuminate\Http\Request $request */
         try {
-            $user = $this->authService->login(
+            $this->authService->login(
                 $request->validated(),
                 $request->filled('remember'),
                 $request->ip(),
@@ -110,5 +111,25 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login')->with('success', 'Đăng xuất thành công!');
+    }
+
+    public function changePasswordForm()
+    {
+        return view('auth.change-password');
+    }
+
+    public function changePassword(UpdatedPasswordRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            $this->authService->changePassword( 
+                Auth::user(), 
+                $data['current_password'], 
+                $data['password']
+            );
+            return redirect()->route('edit-password')->with('success', 'Đổi mật khẩu thành công');
+        } catch (\Exception $e) {
+            return back()->withErrors(['password' => $e->getMessage()])->withInput();
+        }
     }
 }

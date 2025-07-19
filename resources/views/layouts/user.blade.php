@@ -78,7 +78,7 @@
                                     <i class="fas fa-user mr-2 text-gold"></i>
                                     Cập nhật tài khoản 
                                 </a>
-                                <a href="#" class="block px-4 py-2 text-white hover:bg-gold/20 transition-colors">
+                                <a href="{{ route('edit-password') }}" class="block px-4 py-2 text-white hover:bg-gold/20 transition-colors">
                                     <i class="fas fa-gem mr-2 text-gold"></i>
                                     Thay đổi mật khẩu
                                 </a>
@@ -131,7 +131,7 @@
     <main class="relative z-5 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             @if(session('success'))
-            <div class="bg-green-900/50 border border-green-500 text-green-300 p-4 mb-6 rounded-lg flex items-center" role="alert">
+            <div class="bg-green-500 border border-green-200 text-green-100 p-4 mb-6 rounded-lg flex items-center" role="alert">
                 <i class="fas fa-check-circle mr-3"></i>
                 <span>{{ session('success') }}</span>
                 <button type="button" class="ml-auto text-green-300 hover:text-green-100" onclick="this.parentElement.remove()">
@@ -141,7 +141,7 @@
             @endif
 
             @if(session('error'))
-            <div class="bg-red-900/50 border border-red-500 text-red-300 p-4 mb-6 rounded-lg flex items-center" role="alert">
+            <div class="bg-red-600 border border-red-300 text-red-200 p-4 mb-6 rounded-lg flex items-center" role="alert">
                 <i class="fas fa-exclamation-circle mr-3"></i>
                 <span>{{ session('error') }}</span>
                 <button type="button" class="ml-auto text-red-300 hover:text-red-100" onclick="this.parentElement.remove()">

@@ -93,4 +93,17 @@ class AuthService
 
         Auth::logout();
     }
+
+    public function changePassword(User $user, string $currentPassword, string $newPassword)
+    {
+        if (!Hash::check($currentPassword, $user->password)) {
+            throw new \Exception('Mật khẩu hiện tại không chính xác.');
+        }
+
+        if ($currentPassword === $newPassword) {
+            throw new \Exception('Mật khẩu mới không được trùng với mật khẩu hiện tại.');
+        }
+
+        return $this->userRepository->updatePassword($user, $newPassword);    
+    }
 }
