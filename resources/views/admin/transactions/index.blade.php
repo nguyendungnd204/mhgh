@@ -77,7 +77,7 @@
                                         </td>
 
                                         <td class="px-2 py-2">
-                                            <form action="{{ route('admin.transactions.update-status', $transaction->id) }}" method="POST" class="inline-block">
+                                            <form action="{{ route('admin.transactions.update-status', $transaction->id) }}" method="POST" class="inline-block" onclick="event.stopPropagation();">
                                                 @csrf
                                                 @method('PATCH')
                                                 <select name="status" onchange="this.form.submit()" class="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 
