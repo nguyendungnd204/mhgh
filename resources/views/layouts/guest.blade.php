@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Mộng Huyền Giang Hồ')</title>
+    <title>@yield('title', 'Mộng Huyễn Giang Hồ')</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -137,7 +137,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center text-center gap-4">
                 <div class="flex items-center">
                     <i class="fas fa-dragon text-yellow-400 mr-2"></i>
-                    <span class="text-sm">© {{ date('Y') }} Mộng Huyền Giang Hồ. Tất cả quyền được bảo lưu.</span>
+                    <span class="text-sm">© {{ date('Y') }} Mộng Huyễn Giang Hồ. Tất cả quyền được bảo lưu.</span>
                 </div>
                 <div class="flex space-x-6">
                     <a href="#" class="text-yellow-400 hover:text-yellow-300 transition-colors">

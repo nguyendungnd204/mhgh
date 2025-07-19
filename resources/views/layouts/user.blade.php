@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Mộng Huyền Giang Hồ')</title>
+    <title>@yield('title', 'Mộng Huyễn Giang Hồ')</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,7 +44,7 @@
                         <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl shadow-lg glow-effect bg-black flex items-center justify-center overflow-hidden border border-gold/20">
                             <img src="/ava.jpg" alt="Logo" class="w-full h-full object-cover rounded-xl" />
                         </div>
-                        <span class="text-lg md:text-xl font-bold text-yellow-500">Mộng Huyền Giang Hồ</span>
+                        <span class="text-lg md:text-xl font-bold text-yellow-500">Mộng Huyễn Giang Hồ</span>
                     </a>
                 </div>
 

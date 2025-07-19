@@ -78,7 +78,7 @@
                         <img src="/ava.jpg" alt="Logo" class="w-full h-full object-cover rounded-xl" />
                     </div>
                     <div>
-                        <h1 class="text-2xl md:text-4xl font-bold text-yellow-400 drop-shadow-lg">Mộng Huyền Giang Hồ</h1>
+                        <h1 class="text-2xl md:text-4xl font-bold text-yellow-400 drop-shadow-lg">Mộng Huyễn Giang Hồ</h1>
                         <h2 class="text-xl md:text-2xl text-yellow-300 mt-2">Thiên Hạ Đệ Nhất Bang</h2>
                     </div>
                 </div>
