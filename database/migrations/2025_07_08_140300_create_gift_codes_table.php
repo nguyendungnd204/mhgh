@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('max_uses')->nullable();
             $table->integer('used_count')->default(0);
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

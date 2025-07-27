@@ -25,6 +25,7 @@ return new class extends Migration
             $table->timestamp('submitted_at');
             $table->timestamp('verified_at')->nullable();
             $table->boolean('is_manual')->default(true);
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }
