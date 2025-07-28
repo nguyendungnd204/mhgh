@@ -1,11 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
+@can('view giftcodes')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <h2 class="text-2xl font-bold mb-6">Chi tiết mã quà tặng</h2>
-
-
-
         <div class="bg-white shadow-md rounded-lg">
             <div class="p-6">
                 <p class="mb-2"><strong class="font-semibold">Mã code: </strong>{{ $giftCode->code ?? '-' }}</p>
@@ -36,4 +34,5 @@
         </div>
     </div>
     </div>
+@endcan
 @endsection

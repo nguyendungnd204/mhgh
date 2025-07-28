@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'Dashboard')
 @section('content')
+@can('access manager dashboard')
     <div class="container mx-auto px-4 py-6">
         <div class="mb-8">
             <h1 class="text-3xl font-bold text-gray-800 mb-2">Dashboard Admin</h1>
@@ -182,4 +183,5 @@
             </div>
         </div>
     </div>
+@endcan
 @endsection

@@ -8,6 +8,7 @@ use App\Services\NewsService;
 use App\Services\TransactionService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -17,10 +18,18 @@ class DashboardController extends Controller
         private EventService $eventService,
         private NewsService $newsService,
         private GiftService $giftService
-    ){}
+    ){
+        /** @var \Illuminate\Routing\Controller $this */
+        $this->middleware('can:access manager dashboard')->only('index');
+    }
 
     public function index(Request $request)
     {
+        if(!Auth::user()->can('access manager dashboard'))
+        {
+            abort(403, 'Bạn không có quyền thực hiện hành động này');
+        }
+        
         $eventCount = $this->eventService->count();
         $newsCount = $this->newsService->count();
         $giftCount = $this->giftService->count();

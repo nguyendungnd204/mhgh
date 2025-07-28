@@ -25,10 +25,15 @@ class AuthService
                 'name' => $data['name'],
                 'account_name' => $data['account_name'],
                 'password' => Hash::make($data['password']),
-                'role' => $data['role'] ?? User::ROLE_USER,
             ];
 
             $user = $this->userRepository->create($userData);
+
+            if (!empty($data['role'])) {
+                $user->assignRole($data['role']);
+            } else {
+                $user->assignRole('users');
+            }
 
             RateLimiter::clear($throttleKey);
 
@@ -104,6 +109,6 @@ class AuthService
             throw new \Exception('Mật khẩu mới không được trùng với mật khẩu hiện tại.');
         }
 
-        return $this->userRepository->updatePassword($user, $newPassword);    
+        return $this->userRepository->updatePassword($user, $newPassword);
     }
 }

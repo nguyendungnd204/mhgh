@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+@can('view users')
 <div class="container">
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <div class="bg-gray-100 px-2 py-2 border-b border-gray-200">
@@ -18,7 +19,9 @@
                             </form>
                         </div>
                         <div class="flex">
-                            <a href="{{ route('admin.register') }}" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-nowrap">Thêm người dùng</a>
+                            @can('create users')
+                            <a href="{{ route('admin.users.register') }}" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-nowrap">Thêm người dùng</a>
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -76,4 +79,5 @@
         </div>
     </div>
 </div>
+@endcan
 @endsection

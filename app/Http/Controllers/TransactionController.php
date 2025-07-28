@@ -11,10 +11,22 @@ use Illuminate\View\View;
 
 class TransactionController extends Controller
 {
-    public function __construct(private TransactionService $transactionService) {}
+    public function __construct(private TransactionService $transactionService) 
+    {
+        /** @var \Illuminate\Routing\Controller $this */
+        $this->middleware('can:view transactions')->only('index', 'show');
+        $this->middleware('can:edit transactions')->only('updateStatus');
+        //$this->middleware('transactions: create transactions')->only('create', 'store');
+        $this->middleware('can:view transactions user')->only('history', 'transaction');
+    }
 
     public function index(Request $request): View
     {
+        if(!Auth::user()->can('view transactions'))
+        {
+            abort(403, 'Bạn không có quyền thực hiện hành động này');
+        }
+
         $transactions = $this->transactionService->getAllTransactions(['user', 'character'], $request);
 
         // dd($transactions);
@@ -23,6 +35,11 @@ class TransactionController extends Controller
 
     public function updateStatus(updateStatusTransactionRequest $request, int $id)
     {
+        if(!Auth::user()->can('edit transactions'))
+        {
+            abort(403, 'Bạn không có quyền thực hiện hành động này');
+        }
+
         $transaction = $this->transactionService->getTransactionById($id);
 
         try {
@@ -40,6 +57,11 @@ class TransactionController extends Controller
 
     public function show(int $id): View
     {
+        if(!Auth::user()->can('view transactions'))
+        {
+            abort(403, 'Bạn không có quyền thực hiện hành động này');
+        }
+
         $transaction = $this->transactionService->getTransactionById($id);
 
         return view('admin.transactions.show', compact('transaction'));
@@ -48,6 +70,12 @@ class TransactionController extends Controller
     public function history(): View
     {
         $user = Auth::user();
+
+        if(!$user->can('view transactions user'))
+        {
+            abort(403, 'Bạn không có quyền thực hiện hành động này');
+        }
+
         $transactions = $this->transactionService->getAllById($user->id, ['user', 'character']);
         // dd($transactions);
         return view('user.history', compact('transactions'));
@@ -55,6 +83,11 @@ class TransactionController extends Controller
 
     public function transaction(): View
     {
+        if(!Auth::user()->can('view transactions user'))
+        {
+            abort(403, 'Bạn không có quyền thực hiện hành động này');
+        }
+
         return view('user.transaction');
     }
 }

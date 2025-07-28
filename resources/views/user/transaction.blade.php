@@ -1,6 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
+@can('view transactions user')
 <div class="min-h-screen text-yellow-500 relative">
     <div class="fixed inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/30 to-black/90"></div>
@@ -149,4 +150,5 @@
         }
     </style>
 </div>
+@endcan
 @endsection

@@ -20,7 +20,7 @@
                         </label>
                         <input type="text"
                             class="mt-1 block w-full px-3 py-2 bg-gray-900 text-white border rounded-md shadow-sm focus:outline-none focus:border-yellow-400 @error('name') border-red-500 @enderror"
-                            id="name" name="name" value="{{ old('name') }}"  maxlength="255"
+                            id="name" name="name" value="{{ old('name') }}" maxlength="255"
                             placeholder="Nhập họ và tên đầy đủ">
                         @error('name')
                             <div class="text-red-300 text-sm mt-1">{{ $message }}</div>
@@ -33,9 +33,8 @@
                         </label>
                         <input type="text"
                             class="mt-1 block w-full px-3 py-2 bg-gray-900 text-white border rounded-md shadow-sm focus:outline-none focus:border-yellow-400 @error('account_name') border-red-500 @enderror"
-                            id="account_name" name="account_name" value="{{ old('account_name') }}" 
-                            maxlength="255" pattern="^[a-zA-Z0-9_]+$"
-                            placeholder="Chỉ chứa chữ cái, số và dấu gạch dưới">
+                            id="account_name" name="account_name" value="{{ old('account_name') }}" maxlength="255"
+                            pattern="^[a-zA-Z0-9_]+$" placeholder="Chỉ chứa chữ cái, số và dấu gạch dưới">
                         @error('account_name')
                             <div class="text-red-300 text-sm mt-1">{{ $message }}</div>
                         @enderror
@@ -48,17 +47,19 @@
                         <select
                             class="mt-1 block w-full px-3 py-2 bg-gray-900 text-white border rounded-md shadow-sm focus:outline-none focus:border-yellow-400 @error('role') border-red-500 @enderror"
                             id="role" name="role">
-                            <option value="user" {{ old('role', 'user') == 'user' ? 'selected' : '' }}>
-                                Người dùng
-                            </option>
-                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>
-                                Quản trị viên
-                            </option>
+
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->name }}" {{ old('role') == $role->name ? 'selected' : '' }}>
+                                    {{ ucfirst($role->name) }}
+                                </option>
+                            @endforeach
+
                         </select>
                         @error('role')
                             <div class="text-red-300 text-sm mt-1">{{ $message }}</div>
                         @enderror
                     </div>
+
 
                     <div class="mb-4">
                         <label for="password" class="block text-sm font-semibold text-yellow-400">
@@ -67,7 +68,7 @@
                         <div class="relative">
                             <input type="password"
                                 class="mt-1 block w-full px-3 py-2 bg-gray-900 text-white border rounded-md shadow-sm focus:outline-none focus:border-yellow-400 @error('password') border-red-500 @enderror"
-                                id="password" name="password"  minlength="8">
+                                id="password" name="password" minlength="8">
                             <button type="button" id="togglePassword"
                                 class="absolute inset-y-0 right-0 px-3 py-2 text-gray-400 hover:text-yellow-400">
                                 <i class="fas fa-eye" id="eyeIcon"></i>
@@ -85,7 +86,7 @@
                         <div class="relative">
                             <input type="password"
                                 class="mt-1 block w-full px-3 py-2 bg-gray-900 text-white border rounded-md shadow-sm focus:outline-none focus:border-yellow-400"
-                                id="password_confirmation" name="password_confirmation" 
+                                id="password_confirmation" name="password_confirmation"
                                 placeholder="Nhập lại mật khẩu để xác nhận">
                             <button type="button" id="togglePasswordConfirm"
                                 class="absolute inset-y-0 right-0 px-3 py-2 text-gray-400 hover:text-yellow-400">
@@ -114,50 +115,50 @@
     </div>
 
     @push('scripts')
-    <script>
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('password');
-            const eyeIcon = document.getElementById('eyeIcon');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                eyeIcon.classList.remove('fa-eye');
-                eyeIcon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
-            }
-        });
+        <script>
+            document.getElementById('togglePassword').addEventListener('click', function() {
+                const passwordInput = document.getElementById('password');
+                const eyeIcon = document.getElementById('eyeIcon');
 
-        document.getElementById('togglePasswordConfirm').addEventListener('click', function() {
-            const passwordConfirmInput = document.getElementById('password_confirmation');
-            const eyeIconConfirm = document.getElementById('eyeIconConfirm');
-            
-            if (passwordConfirmInput.type === 'password') {
-                passwordConfirmInput.type = 'text';
-                eyeIconConfirm.classList.remove('fa-eye');
-                eyeIconConfirm.classList.add('fa-eye-slash');
-            } else {
-                passwordConfirmInput.type = 'password';
-                eyeIconConfirm.classList.remove('fa-eye-slash');
-                eyeIconConfirm.classList.add('fa-eye');
-            }
-        });
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    eyeIcon.classList.remove('fa-eye');
+                    eyeIcon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    eyeIcon.classList.remove('fa-eye-slash');
+                    eyeIcon.classList.add('fa-eye');
+                }
+            });
 
-        // Handle form submission
-        document.getElementById('registerForm').addEventListener('submit', function() {
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = document.getElementById('btnText');
-            
-            submitBtn.disabled = true;
-            btnText.textContent = 'Đang đăng ký...';
-            
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                btnText.textContent = 'Đăng ký';
-            }, 5000);
-        });
-    </script>
+            document.getElementById('togglePasswordConfirm').addEventListener('click', function() {
+                const passwordConfirmInput = document.getElementById('password_confirmation');
+                const eyeIconConfirm = document.getElementById('eyeIconConfirm');
+
+                if (passwordConfirmInput.type === 'password') {
+                    passwordConfirmInput.type = 'text';
+                    eyeIconConfirm.classList.remove('fa-eye');
+                    eyeIconConfirm.classList.add('fa-eye-slash');
+                } else {
+                    passwordConfirmInput.type = 'password';
+                    eyeIconConfirm.classList.remove('fa-eye-slash');
+                    eyeIconConfirm.classList.add('fa-eye');
+                }
+            });
+
+            // Handle form submission
+            document.getElementById('registerForm').addEventListener('submit', function() {
+                const submitBtn = document.getElementById('submitBtn');
+                const btnText = document.getElementById('btnText');
+
+                submitBtn.disabled = true;
+                btnText.textContent = 'Đang đăng ký...';
+
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Đăng ký';
+                }, 5000);
+            });
+        </script>
     @endpush
 @endsection

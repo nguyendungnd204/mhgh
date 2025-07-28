@@ -53,13 +53,17 @@
                         <i class="fas fa-home mr-1"></i>
                         Trang Chủ
                     </a>
+                    @can('create transactions')
                     <a href="{{ route('user.transaction') }}" class="text-gold hover:text-gold-light transition-colors duration-200 font-medium">
                         Nạp thẻ
                     </a>
+                    @endcan
+                    @can('view transactions user')
                     <a href="{{route('user.history')}}" class="text-gold hover:text-gold-light transition-colors duration-200 font-medium">
                         <i class="fas fa-sword mr-1"></i>
                         Lịch sử
                     </a>
+                    @endcan
                 </div>
 
                 <div class="flex items-center">
@@ -106,12 +110,17 @@
                     <a href="{{ route('home') }}" class="block px-3 py-2 text-gold hover:text-gold-light">
                         <i class="fas fa-home mr-1"></i> Trang Chủ
                     </a>
-                    <a href="{{ route('user.transaction') }}" class="block px-3 py-2 text-gold hover:text-gold-light">
+                   @can('create transactions')
+                    <a href="{{ route('user.transaction') }}" class="text-gold hover:text-gold-light transition-colors duration-200 font-medium">
                         Nạp thẻ
                     </a>
-                    <a href="#" class="block px-3 py-2 text-gold hover:text-gold-light">
+                    @endcan
+                    @can('view transactions user')
+                    <a href="{{route('user.history')}}" class="text-gold hover:text-gold-light transition-colors duration-200 font-medium">
+                        <i class="fas fa-sword mr-1"></i>
                         Lịch sử
                     </a>
+                    @endcan
                     <div class="border-t border-gold/20 pt-2">
                         <div class="px-3 py-2 text-gold">
                             <i class="fas fa-user mr-1"></i> {{ auth()->user()->name }}

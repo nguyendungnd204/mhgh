@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -34,6 +33,8 @@ class RolePermissionSeeder extends Seeder
         }
 
         $permissions[] = 'view transactions user';
+        $permissions[] = 'update profile';
+        
 
         $this->createPermissions($permissions);
 
@@ -48,11 +49,13 @@ class RolePermissionSeeder extends Seeder
                 'view transactions', 'edit transactions', 'create transactions',
                 'view transactions user',
                 'access manager dashboard',
+                'update profile',
             ],
             
             'user' => [
                 'create transactions',
                 'view transactions user',
+                'update profile',
             ],
         ];
 

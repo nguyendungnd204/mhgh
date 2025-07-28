@@ -8,12 +8,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-     public function __construct(
-        private EventService $eventService,
-        private NewsService $newsService,
-    ){}
+    public function __construct(private EventService $eventService, private NewsService $newsService,)
+    {}
 
-     public function index(Request $request)
+    public function index(Request $request)
     {
         $events = $this->eventService->getActiveEvents(5);
         $news = $this->newsService->getActiveNews(5); 

@@ -3,6 +3,7 @@
 @section('title', 'Đăng ký tài khoản')
 
 @section('content')
+@can('create users')
     <div class="flex justify-center py-10">
         <div class="w-full max-w-md">
             <div class="bg-white shadow-lg rounded-lg border border-blue-200">
@@ -32,7 +33,7 @@
                                 Họ và tên <span class="text-red-500">*</span>
                             </label>
                             <input type="text"
-                                class="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('name') border-red-500 @enderror"
+                                class="mt-1 block w-full px-3 py-2 border  rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('name') border-red-500 @enderror"
                                 id="name" name="name" value="{{ old('name') }}" required maxlength="255"
                                 placeholder="Nhập họ và tên đầy đủ">
                         </div>
@@ -42,27 +43,31 @@
                                 Tên tài khoản <span class="text-red-500">*</span>
                             </label>
                             <input type="text"
-                                class="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('account_name') border-red-500 @enderror"
+                                class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('account_name') border-red-500 @enderror"
                                 id="account_name" name="account_name" value="{{ old('account_name') }}" required
                                 maxlength="255" pattern="^[a-zA-Z0-9_]+$"
                                 placeholder="Chỉ chứa chữ cái, số và dấu gạch dưới">
                         </div>
 
-                        <div class="mb-4">
-                            <label for="role" class="block text-sm font-medium text-blue-700">
-                                Quyền <span class="text-red-500">*</span>
-                            </label>
-                            <select
-                                class="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('role') border-red-500 @enderror"
-                                id="role" name="role">
-                                <option value="user" {{ old('role', 'user') == 'user' ? 'selected' : '' }}>
-                                    Người dùng
+                         <div class="mb-4">
+                        <label for="role" class="block text-sm font-medium text-blue-700">
+                            Quyền <span class="text-red-400">*</span>
+                        </label>
+                        <select
+                             class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('role') border-red-500 @enderror"
+                            id="role" name="role">
+
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->name }}" {{ old('role') == $role->name ? 'selected' : '' }}>
+                                    {{ ucfirst($role->name) }}
                                 </option>
-                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>
-                                    Quản trị viên
-                                </option>
-                            </select>
-                        </div>
+                            @endforeach
+
+                        </select>
+                        @error('role')
+                            <div class="text-red-300 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                         <div class="mb-4">
                             <label for="password" class="block text-sm font-medium text-blue-700">
@@ -70,7 +75,7 @@
                             </label>
                             <div class="relative">
                                 <input type="password"
-                                    class="mt-1 block w-full px-3 py-2 pr-10 border border-blue-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('password') border-red-500 @enderror"
+                                    class="mt-1 block w-full px-3 py-2 pr-10 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('password') border-red-500 @enderror"
                                     id="password" name="password" required minlength="8">
                                 <button type="button" id="togglePassword"
                                     class="absolute inset-y-0 right-0 pr-3 flex items-center text-blue-400 hover:text-blue-600">
@@ -85,7 +90,7 @@
                             </label>
                             <div class="relative">
                                 <input type="password"
-                                    class="mt-1 block w-full px-3 py-2 pr-10 border border-blue-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('password_confirmation') border-red-500 @enderror"
+                                    class="mt-1 block w-full px-3 py-2 pr-10 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('password_confirmation') border-red-500 @enderror"
                                     id="password_confirmation" name="password_confirmation" required
                                     placeholder="Nhập lại mật khẩu để xác nhận">
                                 <button type="button" id="togglePasswordConfirm"
@@ -94,12 +99,13 @@
                                 </button>
                             </div>
                         </div>
-
+                        @can('create users')
                         <button type="submit" id="submitBtn"
                             class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
                             <i class="fas fa-user-plus mr-2"></i>
                             <span id="btnText">Tạo tài khoản</span>
                         </button>
+                        @endcan
                     </form>
 
                 </div>
@@ -152,4 +158,5 @@
         });
     </script>
     @endpush
+@endcan
 @endsection

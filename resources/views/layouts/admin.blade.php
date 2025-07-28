@@ -19,37 +19,50 @@
     <div class="flex h-screen overflow-hidden">
         <div class="hidden lg:flex bg-gray-800 text-white w-64 min-h-screen flex-col">
             <div class="flex items-center justify-center h-16 bg-gray-900">
+                @can('access manager dashboard')
                 <a href="{{ route('admin.dashboard') }}" class="text-xl font-bold">
                     </i> Quản lý
                 </a>
+                @endcan
             </div>
             <nav class="flex-1 px-4 py-6 space-y-2">
+                @can('access manager dashboard')
                 <a href="{{ route('admin.dashboard') ?? '#' }}"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                     Bảng điều khiển
                 </a>
+                @endcan
+                @can('view events')
                 <a href="{{ route('admin.events.index') ?? '#' }}"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                     Sự kiện
                 </a>
+                @endcan
+                @can('view news')
                 <a href="{{ route('admin.news.index') ?? '#' }}"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                     Tin tức
                 </a>
+                @endcan
+                @can('view users')
                 <a href="{{ route('admin.users.index') ?? '#' }}"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                     Người dùng
                 </a>
-
+                @endcan
+                @can('view giftcodes')
                 <a href="{{ route('admin.giftcodes.index') ?? '#' }}"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                     Quà tặng
                 </a>
+                @endcan
+                @can('view transactions')
                 <a href="{{ route('admin.transactions.index') ?? '#' }}"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                     Giao dịch
                 </a>
-                  <a href="#"
+                @endcan
+                <a href="#"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                     Hướng dẫn
                 </a>
@@ -78,36 +91,54 @@
         <div id="mobile-sidebar"
             class="fixed inset-y-0 left-0 z-50 w-64 bg-gray-800 transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
             <div class="flex items-center justify-between h-16 bg-gray-900 px-4">
+                @can('access manager dashboard')
                 <a href="{{ route('admin.dashboard') }}" class="text-xl font-bold text-white">
                     </i> Quản lý
                 </a>
+                @endcan
                 <button id="close-mobile-sidebar" class="text-gray-400 hover:text-white">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
 
             <nav class="flex-1 px-4 py-6 space-y-2">
+                 @can('access manager dashboard')
+                <a href="{{ route('admin.dashboard') ?? '#' }}"
+                    class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
+                    Bảng điều khiển
+                </a>
+                @endcan
+                @can('view events')
                 <a href="{{ route('admin.events.index') ?? '#' }}"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
-                    Quản lý sự kiện
+                    Sự kiện
                 </a>
+                @endcan
+                @can('view news')
                 <a href="{{ route('admin.news.index') ?? '#' }}"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
-                    Quản lý tin tức
+                    Tin tức
                 </a>
+                @endcan
+                @can('view users')
                 <a href="{{ route('admin.users.index') ?? '#' }}"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
-                    Quản lý người dùng
+                    Người dùng
                 </a>
+                @endcan
+                @can('view giftcodes')
                 <a href="{{ route('admin.giftcodes.index') ?? '#' }}"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
-                    Quản lý quà tặng
+                    Quà tặng
                 </a>
+                @endcan
+                @can('view transactions')
                 <a href="{{ route('admin.transactions.index') ?? '#' }}"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
-                    Quản lý giao dịch
+                    Giao dịch
                 </a>
-                 <a href="#"
+                @endcan
+                <a href="#"
                     class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors">
                     Hướng dẫn
                 </a>

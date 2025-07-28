@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+@can('edit events')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <h2 class="text-2xl font-bold mb-6">Chỉnh sửa sự kiện</h2>
 
@@ -169,13 +170,16 @@
                 </button>
 
                 <div class="flex justify-end gap-4">
+                    @can('edit events')
                     <a href="{{ route('admin.events.index') }}" class="inline-block px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors">Quay lại</a>
                     <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">Cập nhật</button>
+                    @endcan
                 </div>
             </form>
         </div>
     </div>
 </div>
+@endcan
 
 <script>
     let blockIndex = parseInt("{{ isset($event->contentBlocks) && $event->contentBlocks->count() > 0 ? $event->contentBlocks->count() : 1 }}");
@@ -230,10 +234,6 @@
         const block = button.closest('.content-block');
         const wrapper = document.getElementById('content-blocks-wrapper');
 
-        if (wrapper.querySelectorAll('.content-block').length <= 1) {
-            alert('Phải có ít nhất 1 nội dung');
-            return;
-        }
 
         if (confirm('Bạn có chắc chắn muốn xóa nội dung này?')) {
             block.remove();

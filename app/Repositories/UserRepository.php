@@ -16,7 +16,7 @@ class UserRepository
 
     public function getQuery(): Builder
     {
-        return $this->model->newQuery();
+        return $this->model->newQuery()->latest('created_at');
     }
 
     public function create(array $data): User
@@ -26,7 +26,7 @@ class UserRepository
 
     public function findById(int $id): ?User
     {
-        return $this->model->findOrFail($id);
+        return $this->model->with('roles')->findOrFail($id);
     }
 
     public function findByAccountName(string $accountName): ?User

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    
+@can('create giftcodes')
     <div class="container mx-auto px-4 py-6">
         <div class="bg-white shadow-md rounded-lg">
             <div class="px-6 py-4 border-b border-gray-200 text-xl font-semibold">
@@ -17,9 +17,11 @@
                     @include('admin.giftcodes.form')
 
                     <div class="flex items-center space-x-4">
+                        @can('create giftcodes')
                         <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
                             Tạo
                         </button>
+                        @can
                         <a href="{{ route('admin.giftcodes.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded">
                             Trở về
                         </a>
@@ -28,5 +30,6 @@
             </div>
         </div>
     </div>
+@endcan
 @endsection
 

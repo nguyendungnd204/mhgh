@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@can('view transactions')
     <div class="container">
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="bg-gray-100 px-6 py-2 border-b border-gray-200">
@@ -77,6 +78,7 @@
                                         </td>
 
                                         <td class="px-2 py-2">
+                                            @can('edit transactions')
                                             <form action="{{ route('admin.transactions.update-status', $transaction->id) }}" method="POST" class="inline-block" onclick="event.stopPropagation();">
                                                 @csrf
                                                 @method('PATCH')
@@ -89,6 +91,7 @@
                                                     <option value="failed" {{ $transaction->status == 'failed' ? 'selected' : '' }}>Thất bại</option>
                                                 </select>
                                             </form>
+                                            @endcan
                                         </td>
                             
                                     </tr>
@@ -127,4 +130,5 @@
             });
         });
     </script>
+@endcan
 @endsection

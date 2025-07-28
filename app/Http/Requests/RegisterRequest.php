@@ -20,7 +20,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required|string|max:255',
             'account_name' => 'required|string|unique:users,account_name|max:255|regex:/^[a-zA-Z0-9_]+$/',
             'password' => 'required|confirmed|min:8',
-            'role' => 'sometimes|in:admin,user'
+            'role' => 'sometimes'
         ];
     }
 
@@ -34,7 +34,6 @@ class RegisterRequest extends FormRequest
             'password.required' => 'Mật khẩu là bắt buộc.',
             'password.confirmed' => 'Xác nhận mật khẩu không khớp.',
             'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
-            'role.in' => 'Vai trò không hợp lệ.'
         ];
     }
 

@@ -1,30 +1,37 @@
 <?php
-// app/Http/Controllers/AuthController.php
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdatedPasswordRequest;
 use App\Services\AuthService;
+use App\Services\RoleService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+
 class AuthController extends Controller
 {
-    public function __construct(private AuthService $authService) {}
+
+    public function __construct(private AuthService $authService, private RoleService $roleService)
+    {
+        /** @var \Illuminate\Routing\Controller $this */
+        $this->middleware('can:create users')->only('showCreateUserForm', 'createUser');
+    }
 
     public function showRegisterForm()
     {
-        return view('auth.register');
+        $roles = $this->roleService->getAllRole();
+        return view('auth.register', compact('roles'));
     }
 
     public function showCreateUserForm()
     {
-        if (!Auth::user()?->isAdmin()) {
-            abort(403, 'Không có quyền thực hiện chức năng này');
+        if (!Auth::user()->can('create users')) {
+            abort(403, 'Bạn không có quyền thực hiện hành động này');
         }
+        $roles = $this->roleService->getAllRole();
 
-        return view('admin.users.create');
+        return view('admin.users.create', compact('roles'));
     }
 
     public function register(RegisterRequest $request)
@@ -44,8 +51,8 @@ class AuthController extends Controller
 
     public function createUser(RegisterRequest $request)
     {
-        if (!Auth::user()?->isAdmin()) {
-            abort(403, 'Không có quyền thực hiện chức năng này');
+        if (!Auth::user()->can('create users')) {
+            abort(403, 'Bạn không có quyền thực hiện hành động này');
         }
 
         try {
@@ -68,7 +75,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         try {
-             /** @var \Illuminate\Http\Request $request */
+            /** @var \Illuminate\Http\Request $request */
             $this->authService->login(
                 $request->validated(),
                 $request->filled('remember'),
@@ -97,12 +104,17 @@ class AuthController extends Controller
             return redirect()->route('login');
         }
 
-        return match (true) {
-            $user->isAdmin() => redirect()->route('admin.dashboard'),
-            $user->isUser() => redirect()->route('user.transaction'),
-            default => redirect()->route('home'),
-        };
+        if ($user->hasAnyRole(['admin', 'manager'])) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        if ($user->hasRole('user')) {
+            return redirect()->route('user.transaction');
+        }
+
+        return redirect()->route('home');
     }
+
 
     public function logout(Request $request)
     {

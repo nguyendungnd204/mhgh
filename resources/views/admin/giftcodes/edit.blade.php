@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+@can('edit giftcodes')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <h2 class="text-2xl font-bold mb-6">Chỉnh sửa mã quà tặng</h2>
 
@@ -76,5 +77,5 @@
         </div>
     </div>
 </div>
-
+@endcan
 @endsection

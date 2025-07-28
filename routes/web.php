@@ -10,9 +10,6 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('home.index');
-// })->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('news', [HomeController::class, 'news'])->name('news');
 Route::get('events', [HomeController::class, 'events'])->name('events');
@@ -21,66 +18,135 @@ Route::get('events/{id}', [HomeController::class, 'showEvent'])->name('events.sh
 
 Route::middleware('guest')->group(function() {
     Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register');
-    Route::post('register', [AuthController::class, 'register'])->name('register');
-    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
     Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-    
+    Route::post('login', [AuthController::class, 'login']);
 });
-
 
 Route::middleware('auth')->group(function () {
+    
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('dashboard', [AuthController::class, 'dashboard' ])->name('dashboard');
+    Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
     Route::get('change-password', [AuthController::class, 'changePasswordForm'])->name('edit-password');
     Route::put('change-password', [AuthController::class, 'changePassword'])->name('update-password');
-});
 
-Route::middleware('auth', 'role:admin')->prefix('admin')->name('admin.')->group(function() {
-    
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-    Route::get('register', [AuthController::class, 'showCreateUserForm'])->name('register');
+    Route::prefix('user')->name('user.')->group(function () {
+        
+        Route::middleware(['permission:create transactions'])->group(function () {
+            Route::get('transaction', [TransactionController::class, 'transaction'])->name('transaction');
+        });
+        
+        Route::middleware(['permission:view transactions user'])->group(function () {
+            Route::get('history', [TransactionController::class, 'history'])->name('history');
+        });
+    });
 
-    Route::get('events', [EventController::class, 'index' ])->name('events.index');
-    Route::post('events/store', [EventController::class, 'store' ])->name('events.store');
-    Route::get('events/create', [EventController::class, 'create' ])->name('events.create');
-    Route::get('events/{id}', [EventController::class, 'show'])->name('events.show');
-    Route::get('events/{id}/edit', [EventController::class, 'edit'])->name('events.edit');
-    Route::patch('events/{id}', [EventController::class, 'update'])->name('events.update');
-    Route::delete('events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
+    Route::prefix('admin')->name('admin.')->group(function() {
+        
+        Route::middleware(['permission:access manager dashboard'])->group(function () {
+            Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        });
 
+        Route::prefix('events')->name('events.')->group(function () {
 
-    Route::get('news', [NewsController::class, 'index'])->name('news.index');
-    Route::get('news/create', [NewsController::class, 'create'])->name('news.create');
-    Route::post('news', [NewsController::class, 'store'])->name('news.store');
-    Route::get('news/{id}', [NewsController::class, 'show'])->name('news.show');
-    Route::get('news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
-    Route::patch('news/{id}', [NewsController::class, 'update'])->name('news.update');
+            Route::middleware(['permission:create events'])->group(function () {
+                Route::get('/create', [EventController::class, 'create'])->name('create');
+                Route::post('/', [EventController::class, 'store'])->name('store');
+            });
+            
+            Route::middleware(['permission:view events'])->group(function () {
+                Route::get('/', [EventController::class, 'index'])->name('index');
+                Route::get('/{id}', [EventController::class, 'show'])->name('show');
+            });
+            
+            Route::middleware(['permission:edit events'])->group(function () {
+                Route::get('/{id}/edit', [EventController::class, 'edit'])->name('edit');
+                Route::patch('/{id}', [EventController::class, 'update'])->name('update');
+            });
+            
+            Route::middleware(['permission:delete events'])->group(function () {
+                Route::delete('/{id}', [EventController::class, 'destroy'])->name('destroy');
+            });
+        });
 
+        Route::prefix('news')->name('news.')->group(function () {
 
-    Route::get('users', [UserController::class, 'index'])->name('users.index');
-    Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
-    Route::patch('users/{id}/status', [UserController::class, 'updateStatus'])->name('users.update-status');
-    Route::post('/create-user', [AuthController::class, 'createUser'])->name('users.create-user');
+            Route::middleware(['permission:create news'])->group(function () {
+                Route::get('/create', [NewsController::class, 'create'])->name('create');
+                Route::post('/', [NewsController::class, 'store'])->name('store');
+            });
+            
+            Route::middleware(['permission:view news'])->group(function () {
+                Route::get('/', [NewsController::class, 'index'])->name('index');
+                Route::get('/{id}', [NewsController::class, 'show'])->name('show');
+            });
+            
+            Route::middleware(['permission:edit news'])->group(function () {
+                Route::get('/{id}/edit', [NewsController::class, 'edit'])->name('edit');
+                Route::patch('/{id}', [NewsController::class, 'update'])->name('update');
+            });
+            
 
+            // Route::middleware(['permission:delete news'])->group(function () {
+            //     Route::delete('/{id}', [NewsController::class, 'destroy'])->name('destroy');
+            // });
+        });
 
-    Route::get('giftcodes', [GiftController::class, 'index'])->name('giftcodes.index');
-    Route::get('giftcodes/create', [GiftController::class, 'create'])->name('giftcodes.create');
-    Route::get('/giftcodes/{id}', [GiftController::class, 'show'])->name('giftcodes.show');
-    Route::post('giftcodes', [GiftController::class, 'store'])->name('giftcodes.store');
-    // Route::get('giftcodes/generate-code', [GiftController::class, 'generateCode'])->name('giftcodes.generate');
-    Route::get('giftcodes/{id}/edit', [GiftController::class, 'edit'])->name('giftcodes.edit');
-    Route::patch('giftcodes/{id}', [GiftController::class, 'update'])->name('giftcodes.update');
+        Route::prefix('users')->name('users.')->group(function () {
 
+            Route::middleware(['permission:create users'])->group(function () {
+                Route::get('/register', [AuthController::class, 'showCreateUserForm'])->name('register');
+                Route::post('/create-user', [AuthController::class, 'createUser'])->name('create-user');
+            });
+            
+            Route::middleware(['permission:view users'])->group(function () {
+                Route::get('/', [UserController::class, 'index'])->name('index');
+                Route::get('/{id}', [UserController::class, 'show'])->name('show');
+            });
+            
+            Route::middleware(['permission:edit users'])->group(function () {
+                Route::patch('/{id}/status', [UserController::class, 'updateStatus'])->name('update-status');
+            });
+        });
 
-    Route::get('transactions', [TransactionController::class, 'index'])->name('transactions.index');
-    Route::patch('transactions/{id}/status', [TransactionController::class, 'updateStatus'])->name('transactions.update-status');
-    Route::get('transactions/{id}', [TransactionController::class, 'show'])->name('transactions.show');
+        Route::prefix('giftcodes')->name('giftcodes.')->group(function () {
 
-});
+            Route::middleware(['permission:create giftcodes'])->group(function () {
+                Route::get('/create', [GiftController::class, 'create'])->name('create');
+                Route::post('/', [GiftController::class, 'store'])->name('store');
+                // Route::get('/generate-code', [GiftController::class, 'generateCode'])->name('generate');
+            });
+            
+            Route::middleware(['permission:view giftcodes'])->group(function () {
+                Route::get('/', [GiftController::class, 'index'])->name('index');
+                Route::get('/{id}', [GiftController::class, 'show'])->name('show');
+            });
+            
+            Route::middleware(['permission:edit giftcodes'])->group(function () {
+                Route::get('/{id}/edit', [GiftController::class, 'edit'])->name('edit');
+                Route::patch('/{id}', [GiftController::class, 'update'])->name('update');
+            });
+            
+            Route::middleware(['permission:delete giftcodes'])->group(function () {
+                Route::delete('/{id}', [GiftController::class, 'destroy'])->name('destroy');
+            });
+        });
 
-Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
+        Route::prefix('transactions')->name('transactions.')->group(function () {
+            
+            Route::middleware(['permission:view transactions'])->group(function () {
+                Route::get('/', [TransactionController::class, 'index'])->name('index');
+                Route::get('/{id}', [TransactionController::class, 'show'])->name('show');
+            });
+            
+            Route::middleware(['permission:edit transactions'])->group(function () {
+                Route::patch('/{id}/status', [TransactionController::class, 'updateStatus'])->name('update-status');
+            });
+        });
 
-    Route::get('transaction', [TransactionController::class, 'transaction'])->name('transaction');
-    Route::get('history', [TransactionController::class, 'history'])->name('history');
+        Route::middleware(['permission:access manager dashboard'])->group(function () {
+            Route::get('manager-dashboard', [DashboardController::class, 'managerDashboard'])->name('manager.dashboard');
+        });
+    });
+
 });

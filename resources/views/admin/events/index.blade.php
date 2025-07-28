@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+    @can('view events')
     <div class="container  ">
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="bg-gray-100 px-6 py-2 border-b border-gray-200">
@@ -17,7 +18,9 @@
                                 </form>
                             </div>
                             <div class="flex ">
+                                @can('create events')
                                 <a href="{{route('admin.events.create')}}" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-nowrap">Thêm sự kiện</a>
+                                @endcan
                             </div>
                         </div>
                     </div>
@@ -54,7 +57,9 @@
                                         <td class="px-2 py-2 text-gray-600">{{ $event->created_at ?? '' }}</td>
                                         <td class="px-2 py-2 text-gray-600">{{ $event->user->name ?? '' }}</td>
                                         <td class="px-2 py-2">
+                                            @can('edit events')
                                              <a href="{{ route('admin.events.edit', $event->id) }}" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 transition-colors text-nowrap">Chỉnh sửa</a>
+                                            @endcan
                                         </td>
                             
                                     </tr>
@@ -73,4 +78,5 @@
             </div>
         </div>
     </div>
+    @endcan
 @endsection

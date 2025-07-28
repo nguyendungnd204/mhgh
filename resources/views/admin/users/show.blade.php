@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+@can('view users')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <h2 class="text-2xl font-bold mb-6">Thông tin người dùng</h2>
 
@@ -24,4 +25,5 @@
 </div>
 </div>
 </div>
+@endcan
 @endsection
